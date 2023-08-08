@@ -2,6 +2,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    '@nuxtjs/tailwindcss'
-  ]
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/prismic'
+  ],
+  prismic: { endpoint: 'https://vincent-creton.cdn.prismic.io/api/v2', modern: true }
 })
