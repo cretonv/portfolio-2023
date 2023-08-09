@@ -8,9 +8,6 @@ import {ref} from "vue";
 
 const container = ref(null)
 
-const { client } = usePrismic()
-const { data: home } = await useAsyncData('home', () => client.getByUID('project', 'journiz'))
-
 </script>
 
 <template>
