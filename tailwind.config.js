@@ -2,6 +2,10 @@
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    fontFamily: {
+      'title': ['"Basteleur Moonlight"'],
+      'lato': ['"Lato"'],
+    },
     extend: {
       screens: {
         '-2xl': { max: '1535px' },

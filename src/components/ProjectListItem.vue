@@ -1,0 +1,72 @@
+<script setup lang="ts">
+import {ref} from "vue";
+import {gsap} from "gsap";
+
+defineProps<{
+  project: object
+}>()
+const imgContent = ref()
+const content = ref()
+let open = false
+
+const toggleOpening = () => {
+  if(open) {
+    gsap.to(imgContent.value, {duration: 0.7, height: 0})
+    gsap.to(content.value, {duration: 0.7, height: 0})
+    open = false
+  } else {
+    gsap.to(content.value, {duration: 0.7, height: "auto"})
+    gsap.to(imgContent.value, {duration: 0.7, height: "100%"})
+    open = true
+  }
+}
+</script>
+<template>
+  <div class="flex w-full items-stretch">
+    <div class="w-5/12 py-8">
+      <div
+          class="h-0 overflow-hidden"
+          ref="imgContent"
+      >
+        <div class="relative w-80 h-full bg-white">
+          <img
+              v-if="project.data.thumbnail" class="absolute top-0 left-0 w-full h-full object-cover object-top"
+              :src="project.data.thumbnail.url"
+              alt="Thumbnail"
+          >
+        </div>
+      </div>
+    </div>
+    <div class="w-7/12 pt-4 px-4 flex-1">
+      <!-- HEADING -->
+      <div class="flex items-end" @click="toggleOpening">
+        <h2 v-if="project.data.title" class="grow font-title text-4xl cursor-pointer">{{project.data.title[0].text}}</h2>
+        <div v-if="project.data.year" class="w-fit font-light">{{project.data.year}}</div>
+      </div>
+      <!-- CONTENT -->
+      <div class="transition-all duration-700 overflow-hidden h-auto item-content pb-4">
+        <div ref="content" class="h-0">
+          <div class="flex gap-10 pt-8 h-auto">
+            <div v-if="project.data.resume" class="w-1/2">
+              <div class="font-light text-xs mb-3">Présentation</div>
+              <p class="text-sm">{{project.data.resume[0].text}}</p>
+            </div>
+            <div v-if="project.data.challenges" class="w-1/2">
+              <div class="font-light text-xs mb-3">Enjeux</div>
+              <ul>
+                <li v-for="challenge in project.data.challenges" class="list-disc text-sm leading-6">
+                  {{challenge.challenge}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<style scoped>
+.item-content {
+  border-bottom: solid 1px #FFFFFF;
+}
+</style>
