@@ -29,9 +29,9 @@ const toggleOpening = () => {
 </script>
 <template>
   <div class="flex w-full items-stretch">
-    <div class="w-5/12 py-8">
+    <div class="w-5/12 py-8 pr-12">
       <div
-          class="h-0 overflow-hidden"
+          class="h-0 overflow-hidden float-right grayscale"
           ref="imgContent"
       >
         <div class="relative w-80 h-full bg-white">
