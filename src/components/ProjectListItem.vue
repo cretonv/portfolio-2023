@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {gsap} from "gsap";
+import LinkInline from "~/src/components/LinkInline.vue";
 
 defineProps<{
   project: object
@@ -59,11 +60,25 @@ const toggleOpening = () => {
             </div>
             <div v-if="project.data.challenges" class="w-1/2">
               <div class="font-light text-xs mb-3">Enjeux</div>
-              <ul>
+              <ul class="pl-3">
                 <li v-for="challenge in project.data.challenges" class="list-disc text-sm leading-6">
                   {{challenge.challenge}}
                 </li>
               </ul>
+            </div>
+          </div>
+          <div class="flex gap-10 pt-8 h-auto items-stretch">
+            <div v-if="project.data.technologies" class="w-1/2">
+              <div class="font-light text-xs mb-3">Technologies</div>
+              <ul class="flex flex-wrap gap-2">
+                <li v-for="technologie in project.data.technologies" class="techno-item text-sm leading-4">
+                  {{technologie.technologie}}
+                </li>
+              </ul>
+            </div>
+            <div class="w-1/2 flex items-end justify-end gap-4">
+              <LinkInline v-if="project.data.body.length > 0" link="#" dot-type="300">Voir la page du projet</LinkInline>
+              <LinkInline v-if="project.data.url" :link="project.data.url.url" target="_blank" dot-type="600">Voir le projet</LinkInline>
             </div>
           </div>
         </div>
@@ -74,5 +89,9 @@ const toggleOpening = () => {
 <style scoped>
 .item-content {
   border-bottom: solid 1px #FFFFFF;
+}
+.techno-item:not(:last-child)::after  {
+  content: "·";
+  margin-left: 8px;
 }
 </style>
