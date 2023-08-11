@@ -15,14 +15,8 @@ const toggleOpening = () => {
   if(open) {
     gsap.to(imgContent.value, {duration: 0.7, height: 0})
     gsap.to(content.value, {duration: 0.7, height: 0})
-    // tl.to(content.value, {duration: 0.7, height: 0}).to(imgContent.value, {duration: 0.5, opacity: 0})
-    /*const tl = gsap.timeline()
-    tl.to(imgContent.value, {duration: 0.7, height: 0}).to(content.value, {duration: 0.7, height: 0}) */
     open = false
   } else {
-    /* gsap.to(content.value, {duration: 0.7, height: "auto"})
-    const tl = gsap.timeline()
-    tl.to(imgContent.value, {duration: 0.7, height: "100%"}).to(imgContent.value, {duration: 0.5, opacity: 1}) */
     const tl = gsap.timeline()
     tl.to(content.value, {duration: 0.7, height: "auto"}).to(imgContent.value, {duration: 0.7, height: "100%"})
     open = true
