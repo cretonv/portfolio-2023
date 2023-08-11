@@ -8,6 +8,7 @@ defineProps<{
 }>()
 const imgContent = ref()
 const content = ref()
+const buttonHover = ref(false)
 let open = false
 
 const toggleOpening = () => {
@@ -32,12 +33,16 @@ const toggleOpening = () => {
   <div class="flex w-full items-stretch">
     <div class="w-5/12 py-8 pr-12">
       <div
-          class="h-0 overflow-hidden float-right grayscale"
+          class="h-0 overflow-hidden float-right"
           ref="imgContent"
       >
-        <div class="relative w-80 h-full bg-white">
+        <div
+            class="relative w-80 h-full bg-white transition-all duration-1000"
+            :class="buttonHover ? 'grayscale-0' : 'grayscale'"
+        >
           <img
-              v-if="project.data.thumbnail" class="absolute top-0 left-0 w-full h-full object-cover object-top"
+              v-if="project.data.thumbnail"
+              class="absolute top-0 left-0 w-full h-full object-cover object-top"
               :src="project.data.thumbnail.url"
               alt="Thumbnail"
           >
@@ -77,8 +82,23 @@ const toggleOpening = () => {
               </ul>
             </div>
             <div class="w-1/2 flex items-end justify-end gap-4">
-              <LinkInline v-if="project.data.body.length > 0" link="#" dot-type="300">Voir la page du projet</LinkInline>
-              <LinkInline v-if="project.data.url" :link="project.data.url.url" target="_blank" dot-type="600">Voir le projet</LinkInline>
+              <LinkInline
+                  v-if="project.data.body.length > 0"
+                  @mouseleave="buttonHover = false"
+                  @mouseover="buttonHover = true"
+                  link="#"
+                  dot-type="300">
+                Voir la page du projet`
+              </LinkInline>
+              <LinkInline
+                  v-if="project.data.url"
+                  :link="project.data.url.url"
+                  @mouseleave="buttonHover = false"
+                  @mouseover="buttonHover = true"
+                  target="_blank"
+                  dot-type="600">
+                Voir le projet
+              </LinkInline>
             </div>
           </div>
         </div>
