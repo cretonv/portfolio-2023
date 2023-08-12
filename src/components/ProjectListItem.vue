@@ -90,6 +90,7 @@ const toggleOpening = () => {
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
                   target="_blank"
+                  rel=“noreferrer”
                   dot-type="600">
                 Voir le projet
               </LinkInline>
