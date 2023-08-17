@@ -6,7 +6,7 @@ export default <RouterConfig> {
     {
       name: 'home',
       path: '/',
-      component: () => import('~/src/views/WaitingScreenView.vue')
+      component: () => import('~/src/views/HomeView.vue')
     },
     {
       name: 'projects-list',

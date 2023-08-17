@@ -5,6 +5,7 @@ export default {
     fontFamily: {
       'title': ['"Basteleur Moonlight"'],
       'lato': ['"Lato"'],
+      'porpora': ['"Porpora"'],
     },
     extend: {
       screens: {
