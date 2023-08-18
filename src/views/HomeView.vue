@@ -4,7 +4,7 @@ import Presentation from "~/src/components/Presentation.vue";
 import Footer from "~/src/components/Footer.vue";
 
 const { client } = usePrismic()
-const { data: home } = await useAsyncData('general', () => client.getSingle('home'))
+const { data: home } = await useAsyncData('home', () => client.getSingle('home'))
 
 const presentationBlock = computed(() => {
   if (home.value && home.value.data) {
