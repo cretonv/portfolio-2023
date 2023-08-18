@@ -2,6 +2,20 @@
 import HomeHero from "~/src/components/HomeHero.vue";
 import Presentation from "~/src/components/Presentation.vue";
 import Footer from "~/src/components/Footer.vue";
+import Lenis from "@studio-freight/lenis";
+
+
+onMounted(() => {
+  const lenis = new Lenis()
+  lenis.on('scroll', () => {})
+
+  function raf(time:number) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
+})
 
 const { client } = usePrismic()
 const { data: home } = await useAsyncData('home', () => client.getSingle('home'))
