@@ -24,6 +24,10 @@ const props = defineProps({
     target: {
         type: String,
         default: "_self"
+    },
+    darkMode: {
+        type: Boolean,
+        default: false
     }
 })
 const Svg = computed(() => {
@@ -31,9 +35,9 @@ const Svg = computed(() => {
 })
 </script>
 <template>
-  <a class="flex items-center" :href="link" :target="target">
+  <a class="flex items-center" :class="darkMode? 'text-black dark' : 'text-beige'" :href="link" :target="target">
       <Svg class="mr-2" />
-      <div class="relative text-beige uppercase text-sm"><slot /></div>
+      <div class="relative uppercase text-sm"><slot /></div>
   </a>
 </template>
 <style>
@@ -50,5 +54,8 @@ a > div::after {
 }
 a:hover > div::after {
   transform: scaleX(1);
+}
+a.dark > div::after {
+  background-color: #181618;
 }
 </style>

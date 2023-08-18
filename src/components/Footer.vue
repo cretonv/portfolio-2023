@@ -2,6 +2,7 @@
 import DotDark300 from "~/src/components/svg/dot/dotDark300.vue";
 import DotDark600 from "~/src/components/svg/dot/dotDark600.vue";
 import FooterQuote from "~/src/components/FooterQuote.vue";
+import LinkInline from "~/src/components/LinkInline.vue";
 
 const { client } = usePrismic()
 const { data: footer } = await useAsyncData('footer', () => client.getSingle('footer'))
@@ -52,7 +53,17 @@ const { data: footer } = await useAsyncData('footer', () => client.getSingle('fo
                 {{hobby.hobby}}
               </div>
             </div>
+
           </div>
+          <LinkInline
+              class="mt-8"
+              link="/pdf/CV.pdf"
+              target="_blank"
+              dotType="dark600"
+              :dark-mode="true"
+          >
+            Télécharger le CV complet
+          </LinkInline>
         </div>
       </div>
     </div>

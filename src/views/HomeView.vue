@@ -31,7 +31,7 @@ const presentationBlock = computed(() => {
 <template>
   <div class="relative bg-black">
     <HomeHero />
-    <Presentation :data="presentationBlock" />
+    <Presentation class="mt-8" :data="presentationBlock" />
     <Footer />
   </div>
 </template>
