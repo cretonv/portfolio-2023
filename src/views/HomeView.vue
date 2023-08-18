@@ -6,7 +6,7 @@ import Lenis from "@studio-freight/lenis";
 
 
 onMounted(() => {
-  const lenis = new Lenis()
+  const lenis = new Lenis({duration: 1.8})
   lenis.on('scroll', () => {})
 
   function raf(time:number) {

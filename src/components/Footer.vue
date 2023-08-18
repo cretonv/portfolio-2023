@@ -26,7 +26,7 @@ const { data: footer } = await useAsyncData('footer', () => client.getSingle('fo
           </div>
         </div>
       </div>
-      <div class="w-1/2">
+      <div v-if="footer" class="w-1/2">
         <div class="w-2/3 float-right">
           <div class="mb-8">
             <div class="flex items-center">
