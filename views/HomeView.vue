@@ -30,10 +30,10 @@ const presentationBlock = computed(() => {
 </script>
 <template>
   <div class="relative bg-black">
-    <section class="relative main-content z-10 bg-black pb-4">
+    <section style="z-index: 1" class="relative main-content bg-black pb-4">
       <HomeHero />
       <Presentation class="mt-8" :data="presentationBlock" />
     </section>
-    <Footer class="relative z-0" />
+    <Footer style="z-index: 0" class="relative" />
   </div>
 </template>
