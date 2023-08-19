@@ -6,12 +6,12 @@ export default <RouterConfig> {
     {
       name: 'home',
       path: '/',
-      component: () => import('~/pages/HomeView.vue')
+      component: () => import('~/views/HomeView.vue')
     },
     {
       name: 'projects-list',
       path: '/projets',
-      component: () => import('~/pages/ProjectsListView.vue')
+      component: () => import('~/views/ProjectsListView.vue')
     }
   ],
 }
