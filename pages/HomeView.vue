@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HomeHero from "~/src/components/HomeHero.vue";
-import Presentation from "~/src/components/Presentation.vue";
-import Footer from "~/src/components/Footer.vue";
+import HomeHero from "~/components/HomeHero.vue";
+import Presentation from "~/components/Presentation.vue";
+import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
 
 

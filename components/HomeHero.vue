@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import TitleH1 from "../components/TitleH1.vue";
-import LogoInitial from "../components/LogoInitial.vue";
-import Name from "../components/Name.vue";
-import BrokenCircle from "../components/BrokenCircle.vue";
+import TitleH1 from "./TitleH1.vue";
+import LogoInitial from "./LogoInitial.vue";
+import Name from "./Name.vue";
+import BrokenCircle from "./BrokenCircle.vue";
 import {ref} from "vue";
 
 const container = ref(null)

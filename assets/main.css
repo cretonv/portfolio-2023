@@ -1,5 +1,5 @@
-@import "./fonts/fonts.css";
-@import "./lenis.css";
+@import "fonts/fonts.css";
+@import "lenis.css";
 
 @tailwind base;
 @tailwind components;

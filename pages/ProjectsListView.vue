@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ProjectListItem from "~/src/components/ProjectListItem.vue";
+import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
 
 const { client } = usePrismic()

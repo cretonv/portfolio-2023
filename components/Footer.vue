@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import DotDark300 from "~/src/components/svg/dot/dotDark300.vue";
-import DotDark600 from "~/src/components/svg/dot/dotDark600.vue";
-import FooterQuote from "~/src/components/FooterQuote.vue";
-import LinkInline from "~/src/components/LinkInline.vue";
+import DotDark300 from "~/components/svg/dot/dotDark300.vue";
+import DotDark600 from "~/components/svg/dot/dotDark600.vue";
+import FooterQuote from "~/components/FooterQuote.vue";
+import LinkInline from "~/components/LinkInline.vue";
 import {onMounted} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";

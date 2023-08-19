@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {gsap} from "gsap";
-import LinkInline from "~/src/components/LinkInline.vue";
+import LinkInline from "~/components/LinkInline.vue";
 
 defineProps<{
   project: object
