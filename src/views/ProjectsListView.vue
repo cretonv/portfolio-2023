@@ -1,9 +1,22 @@
 <script setup lang="ts">
 import ProjectListItem from "~/src/components/ProjectListItem.vue";
+import Lenis from "@studio-freight/lenis";
 
 const { client } = usePrismic()
 const {data: general } = await useAsyncData('general', () => client.getSingle('general'))
 const { data: projects } = await useAsyncData('projects', () => client.getAllByType('project'))
+
+onMounted(() => {
+  const lenis = new Lenis({duration: 1.8})
+  lenis.on('scroll', () => {})
+
+  function raf(time:number) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
+})
 </script>
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen p-10">
