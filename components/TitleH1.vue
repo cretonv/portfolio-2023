@@ -6,11 +6,9 @@ import {gsap} from "gsap";
 const title = ref()
 let splitTitle
 onMounted(() => {
-  // console.log(title.value.innerHTML)
   // To don't display h1 before load (without style)
   title.value.classList.remove('opacity-0')
   splitTitle = SplitType.create(title.value, {types: 'words, chars'})
-  console.log(splitTitle)
   // Var use to make delay and stagger
   let lineCharCounter: number
   let lineCounter: number = 0
@@ -20,10 +18,10 @@ onMounted(() => {
       lineCharCounter = 0
       Array.from(word.children).forEach((char) => {
         gsap.from(char, {
-          y: 100 + 10 * lineCharCounter,
+          y: 100 + 20 * lineCharCounter,
           duration: 0.75,
           delay: 0.25 * lineCounter,
-          stagger: { amount: 1.1 * lineCharCounter },
+          stagger: { amount: 1.3 * lineCharCounter },
           ease: "sine.out"
         })
         lineCharCounter ++

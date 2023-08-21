@@ -3,31 +3,28 @@ import gsap from 'gsap';
 const pageTransition = {
     name: 'page-transiton',
     mode: 'out-in',
+    onBeforeEnter: (el) => {
+        Array.from(el.children).find((element) => element.classList.contains('transition-layer'))?.classList.add('w-full')
+    },
     onEnter: (el, done) => {
-        console.log('ENTER')
-        console.log(el)
-        /*gsap.set(el, { autoAlpha: 0, scale: 0.8, xPercent: -100 });
+        const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
+        console.log(transitionLayer)
         gsap
             .timeline({
                 paused: true,
                 onComplete() {
-                    toggleTransitionComplete(true);
                     done();
                 },
             })
-            .to(el, { autoAlpha: 1, xPercent: 0, duration: 0.25 })
-            .to(el, { scale: 1, duration: 0.25 })
-            .play(); */
+            .fromTo(transitionLayer, { width: '100vw'}, {width: 0, duration: 1.5})
+            .play();
     },
     onLeave: (el, done) => {
-        console.log('LEAVE')
-        console.log(el)
-        /*toggleTransitionComplete(false);
+        const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
         gsap
             .timeline({ paused: true, onComplete: done })
-            .to(el, { scale: 0.8, duration: 0.2 })
-            .to(el, { xPercent: 100, autoAlpha: 0, duration: 0.2 })
-            .play(); */
+            .to(transitionLayer, { width: '100vw', duration: 1.5 })
+            .play();
     },
 };
 

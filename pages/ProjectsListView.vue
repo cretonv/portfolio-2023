@@ -1,22 +1,11 @@
 <script setup lang="ts">
 import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
+import gsap from "gsap";
+import transitionConfig from "~/helpers/transitionConfig";
 
 definePageMeta({
-  pageTransition: {
-    name: 'page-transiton',
-    mode: 'out-in',
-    onEnter: (el, done) => {
-      console.log('ENTER')
-      console.log(el)
-      done()
-    },
-    onLeave: (el, done) => {
-      console.log('LEAVE')
-      console.log(el)
-      done()
-    },
-  },
+  pageTransition: transitionConfig,
   name: 'projects-list',
   path: '/projets',
 });
@@ -39,6 +28,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen p-10">
+    <div class="transition-layer z-20 fixed left-0 top-0 bg-black h-screen" />
     <h1 class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10">{{general.data.projects_listing_title[0].text}}</h1>
     <div class="flex flex-wrap w-full text-white font-lato" v-if="projects">
       <ProjectListItem :key="project.id" v-for="project in projects" :project="project" />

@@ -4,22 +4,12 @@ import Presentation from "~/components/Presentation.vue";
 import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
 import {definePageMeta} from "#imports";
+import pageTransition from "~/helpers/transitionConfig";
+import gsap from "gsap";
+import transitionConfig from "~/helpers/transitionConfig";
 
 definePageMeta({
-  pageTransition: {
-    name: 'page-transiton',
-    mode: 'out-in',
-    onEnter: (el, done) => {
-      console.log('ENTER')
-      console.log(el)
-      done()
-    },
-    onLeave: (el, done) => {
-      console.log('LEAVE')
-      console.log(el)
-      done()
-    },
-  },
+  pageTransition: transitionConfig
 })
 
 const mainContent = ref<HTMLElement>()
@@ -49,6 +39,7 @@ const presentationBlock = computed(() => {
 </script>
 <template>
   <div class="relative bg-black">
+    <div class="transition-layer z-20 fixed left-0 top-0 bg-black h-screen" />
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4">
       <HomeHero />
       <Presentation class="mt-8" :data="presentationBlock" />
