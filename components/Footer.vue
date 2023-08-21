@@ -3,21 +3,25 @@ import DotDark300 from "~/components/svg/dot/dotDark300.vue";
 import DotDark600 from "~/components/svg/dot/dotDark600.vue";
 import FooterQuote from "~/components/FooterQuote.vue";
 import LinkInline from "~/components/LinkInline.vue";
-import {onMounted} from "@vue/runtime-core";
+import {onMounted, onUpdated} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+
+const props = defineProps<{
+  mainContent: HTMLElement
+}>()
 
 const { client } = usePrismic()
 const { data: footer } = await useAsyncData('footer', () => client.getSingle('footer'))
 
-onMounted(() => {
-  gsap.registerPlugin(ScrollTrigger)
-  gsap.set('section.footer-container', { yPercent: -50 })
+const footerContainer = ref()
+gsap.registerPlugin(ScrollTrigger)
+onUpdated(() => {
+  gsap.set(footerContainer.value, { yPercent: -50 })
   const uncover = gsap.timeline({ paused:true })
-
-  uncover.to('section.footer-container', { yPercent: 0, ease: 'none' })
+  uncover.to(footerContainer.value, { yPercent: 0, ease: 'none' })
   ScrollTrigger.create({
-    trigger: 'section.main-content',
+    trigger: props.mainContent,
     start: 'bottom bottom',
     end: '+=75%',
     animation: uncover,
@@ -27,7 +31,7 @@ onMounted(() => {
 </script>
 <template>
   <footer class="h-[75vh] w-full">
-    <section class="footer-container h-[75vh] bg-white-secondary px-10 flex flex-col justify-end">
+    <section ref="footerContainer" class="footer-container h-[75vh] bg-white-secondary px-10 flex flex-col justify-end">
       <div class="flex mb-8">
         <!-- TODO: Refacto cette div avec des composants -->
         <div class="w-1/2">
