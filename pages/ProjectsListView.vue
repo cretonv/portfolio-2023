@@ -2,6 +2,25 @@
 import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
 
+definePageMeta({
+  pageTransition: {
+    name: 'page-transiton',
+    mode: 'out-in',
+    onEnter: (el, done) => {
+      console.log('ENTER')
+      console.log(el)
+      done()
+    },
+    onLeave: (el, done) => {
+      console.log('LEAVE')
+      console.log(el)
+      done()
+    },
+  },
+  name: 'projects-list',
+  path: '/projets',
+});
+
 const { client } = usePrismic()
 const {data: general } = await useAsyncData('general', () => client.getSingle('general'))
 const { data: projects } = await useAsyncData('projects', () => client.getAllByType('project'))

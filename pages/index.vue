@@ -3,6 +3,24 @@ import HomeHero from "~/components/HomeHero.vue";
 import Presentation from "~/components/Presentation.vue";
 import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
+import {definePageMeta} from "#imports";
+
+definePageMeta({
+  pageTransition: {
+    name: 'page-transiton',
+    mode: 'out-in',
+    onEnter: (el, done) => {
+      console.log('ENTER')
+      console.log(el)
+      done()
+    },
+    onLeave: (el, done) => {
+      console.log('LEAVE')
+      console.log(el)
+      done()
+    },
+  },
+})
 
 const mainContent = ref<HTMLElement>()
 
