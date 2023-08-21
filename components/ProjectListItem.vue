@@ -25,7 +25,7 @@ const toggleOpening = () => {
 </script>
 <template>
   <div class="flex w-full items-stretch">
-    <div class="w-5/12 py-8 pr-12">
+    <div class="w-5/12 py-8 pr-12  -md:hidden">
       <div
           class="h-0 overflow-hidden float-right"
           ref="imgContent"
@@ -43,7 +43,7 @@ const toggleOpening = () => {
         </div>
       </div>
     </div>
-    <div class="w-7/12 pt-4 px-4 flex-1">
+    <div class="w-7/12 pt-4 px-4 flex-1 -md:w-full -md:px-0">
       <!-- HEADING -->
       <div class="flex items-end" @click="toggleOpening">
         <h2 v-if="project.data.title" class="grow font-title text-4xl cursor-pointer">{{project.data.title[0].text}}</h2>
@@ -52,12 +52,12 @@ const toggleOpening = () => {
       <!-- CONTENT -->
       <div class="transition-all duration-700 overflow-hidden h-auto item-content pb-4">
         <div ref="content" class="h-0">
-          <div class="flex gap-10 pt-8 h-auto">
-            <div v-if="project.data.resume" class="w-1/2">
+          <div class="flex gap-10 pt-8 h-auto -md:flex-wrap -md:gap-6">
+            <div v-if="project.data.resume" class="w-1/2 -md:w-full">
               <div class="font-light text-xs mb-3">Présentation</div>
               <p class="text-sm">{{project.data.resume[0].text}}</p>
             </div>
-            <div v-if="project.data.challenges" class="w-1/2">
+            <div v-if="project.data.challenges" class="w-1/2 -md:w-full">
               <div class="font-light text-xs mb-3">Enjeux</div>
               <ul class="pl-3">
                 <li v-for="challenge in project.data.challenges" class="list-disc text-sm leading-6">
@@ -66,8 +66,8 @@ const toggleOpening = () => {
               </ul>
             </div>
           </div>
-          <div class="flex gap-10 pt-8 h-auto items-stretch">
-            <div v-if="project.data.technologies" class="w-1/2">
+          <div class="flex gap-10 pt-8 h-auto items-stretch -md:flex-wrap -md:gap-6">
+            <div v-if="project.data.technologies" class="w-1/2 -md:w-full">
               <div class="font-light text-xs mb-3">Technologies</div>
               <ul class="flex flex-wrap gap-2">
                 <li v-for="technologie in project.data.technologies" class="techno-item text-sm leading-4">
@@ -75,7 +75,7 @@ const toggleOpening = () => {
                 </li>
               </ul>
             </div>
-            <div class="w-1/2 flex items-end justify-end gap-4">
+            <div class="w-1/2 flex items-end justify-end gap-4 -md:flex-wrap -md:justify-start -md:w-full">
               <LinkInline
                   v-if="project.data.body.length > 0"
                   @mouseleave="buttonHover = false"
