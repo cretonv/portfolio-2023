@@ -6,18 +6,19 @@ import {gsap} from "gsap";
 const title = ref()
 let splitTitle
 onMounted(() => {
+  // console.log(title.value.innerHTML)
   // To don't display h1 before load (without style)
   title.value.classList.remove('opacity-0')
-
-  splitTitle = SplitType.create(title.value, {types: 'lines, chars'})
+  splitTitle = SplitType.create(title.value, {types: 'words, chars'})
+  console.log(splitTitle)
   // Var use to make delay and stagger
   let lineCharCounter: number
   let lineCounter: number = 0
 
-  if(splitTitle.lines) {
-    splitTitle.lines.forEach((line) => {
+  if(splitTitle.words) {
+    splitTitle.words.forEach((word) => {
       lineCharCounter = 0
-      Array.from(line.children).forEach((char) => {
+      Array.from(word.children).forEach((char) => {
         gsap.from(char, {
           y: 100 + 10 * lineCharCounter,
           duration: 0.75,
@@ -30,6 +31,9 @@ onMounted(() => {
       lineCounter ++
     })
   }
+})
+onBeforeUnmount(() => {
+  SplitType.revert(title.value)
 })
 </script>
 <template>
@@ -49,7 +53,7 @@ h1 {
         line-height: 56px;
     }
 }
-.line {
+.word {
   overflow: hidden;
 }
 </style>
