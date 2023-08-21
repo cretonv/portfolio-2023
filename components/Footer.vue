@@ -32,7 +32,7 @@ onUpdated(() => {
 <template>
   <footer class="h-[75vh] w-full">
     <section ref="footerContainer" class="footer-container h-[75vh] bg-white-secondary px-10 flex flex-col justify-end">
-      <div class="flex mb-8">
+      <div class="flex mb-10">
         <!-- TODO: Refacto cette div avec des composants -->
         <div class="w-1/2">
           <img src="/svg/name.svg" alt="Name text" class="w-full h-auto">
