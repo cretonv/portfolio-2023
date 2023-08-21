@@ -17,28 +17,35 @@ const { data: footer } = await useAsyncData('footer', () => client.getSingle('fo
 const footerContainer = ref()
 gsap.registerPlugin(ScrollTrigger)
 onUpdated(() => {
-  gsap.set(footerContainer.value, { yPercent: -50 })
-  const uncover = gsap.timeline({ paused:true })
-  uncover.to(footerContainer.value, { yPercent: 0, ease: 'none' })
-  ScrollTrigger.create({
-    trigger: props.mainContent,
-    start: 'bottom bottom',
-    end: '+=75%',
-    animation: uncover,
-    scrub: true,
-  })
+  if(window.innerWidth > 768) {
+    gsap.set(footerContainer.value, { yPercent: -50 })
+    const uncover = gsap.timeline({ paused:true })
+    uncover.to(footerContainer.value, { yPercent: 0, ease: 'none' })
+    ScrollTrigger.create({
+      trigger: props.mainContent,
+      start: 'bottom bottom',
+      end: '+=75%',
+      animation: uncover,
+      scrub: true,
+    })
+  }
 })
 </script>
 <template>
-  <footer class="h-[75vh] w-full">
-    <section ref="footerContainer" class="footer-container h-[75vh] bg-white-secondary px-10 flex flex-col justify-end">
-      <div class="flex mb-10">
+  <footer class="h-[75vh] w-full -md:h-fit">
+    <section
+        ref="footerContainer"
+        class="footer-container h-[75vh] bg-white-secondary px-10 flex flex-col justify-end -md:h-fit -md:pt-8 -md:px-8"
+    >
+      <div class="flex mb-10 -md:flex-wrap -md:mb-6">
         <!-- TODO: Refacto cette div avec des composants -->
-        <div class="w-1/2">
+        <div class="w-1/2 -md:w-full -md:mb-6">
           <img src="/svg/name.svg" alt="Name text" class="w-full h-auto">
-          <div class="flex flex-col float-right">
-            <a :href="'mailto' + footer.data.email" class="mt-7 block font-porpora">{{footer.data.email}}</a>
-            <div class="mt-12">
+          <div class="flex flex-col float-right -md:float-left">
+            <a :href="'mailto' + footer.data.email" class="mt-7 block font-porpora -md:mt-6">
+              {{footer.data.email}}
+            </a>
+            <div class="mt-12 -md:mt-6">
               <div class="uppercase text-sm font-porpora flex flex-col">
                 <span>Réseaux</span>
                 <div class="mt-4 flex gap-4">
@@ -50,9 +57,9 @@ onUpdated(() => {
             </div>
           </div>
         </div>
-        <div v-if="footer" class="w-1/2">
-          <div class="w-2/3 float-right">
-            <div class="mb-8">
+        <div v-if="footer" class="w-1/2 -md:w-full">
+          <div class="w-2/3 float-right -md:w-full">
+            <div class="mb-8 -md:mb-6">
               <div class="flex items-center">
                 <dotDark300 class="mr-2" />
                 <span class="uppercase text-sm font-porpora">Formations</span>
@@ -67,10 +74,10 @@ onUpdated(() => {
                 </div>
               </div>
             </div>
-            <div>
+            <div class="-md:hidden">
               <div class="flex items-center">
                 <dotDark600 class="mr-2" />
-                <span class="uppercase text-sm font-porpora">Formations</span>
+                <span class="uppercase text-sm font-porpora">Loisirs</span>
               </div>
               <div class="pl-4 pt-3">
                 <div v-for="hobby in footer.data.hobbies" class="flex gap-8 font-lato text-sm mb-2">
