@@ -35,10 +35,10 @@ onBeforeUnmount(() => {
 })
 </script>
 <template>
-  <h1 ref="title" class="text-white opacity-0"><slot /></h1>
+  <h1 ref="title" class="h1-title text-white opacity-0"><slot /></h1>
 </template>
 <style>
-h1 {
+h1.title {
   font-family: Basteleur Moonlight;
   font-weight: 300;
   font-size: 91px;
@@ -46,7 +46,7 @@ h1 {
   font-kerning: none;
 }
 @media (max-width: 768px) {
-    h1 {
+    h1.title {
         font-size: 40px;
         line-height: 56px;
     }
