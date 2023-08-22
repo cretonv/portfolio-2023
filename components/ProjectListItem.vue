@@ -13,10 +13,12 @@ let open = false
 
 const toggleOpening = () => {
   if(open) {
+    imgContent.value.parentElement.classList.remove('open')
     gsap.to(imgContent.value, {duration: 0.7, height: 0})
     gsap.to(content.value, {duration: 0.7, height: 0})
     open = false
   } else {
+    imgContent.value.parentElement.classList.add('open')
     const tl = gsap.timeline()
     tl.to(content.value, {duration: 0.7, height: "auto"}).to(imgContent.value, {duration: 0.7, height: "100%"})
     open = true
@@ -77,7 +79,7 @@ const toggleOpening = () => {
             </div>
             <div class="w-1/2 flex items-end justify-end gap-4 -md:flex-wrap -md:justify-start -md:w-full">
               <LinkInline
-                  v-if="project.data.body.length > 0"
+                  v-if="project.data.body.length > 0 && false"
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
                   link="#"
