@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   css: [
     "~/assets/main.css",
+    "~/public/fonts/fonts.css"
   ],
   devtools: { enabled: true },
   modules: [
