@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
 import transitionConfig from "~/helpers/transitionConfig";
 
 definePageMeta({
@@ -12,7 +11,12 @@ definePageMeta({
 
 const { client } = usePrismic()
 const {data: general } = await useAsyncData('general', () => client.getSingle('general'))
-const { data: projects } = await useAsyncData('projects', () => client.getAllByType('project'))
+const { data: projects } = await useAsyncData('projects', () => client.getAllByType('project', {
+  orderings: {
+    field: 'my.project.year',
+    direction: 'desc',
+  },
+}))
 
 onMounted(() => {
   const lenis = new Lenis({duration: 1.8})
