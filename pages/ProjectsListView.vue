@@ -15,7 +15,7 @@ const {data: general } = await useAsyncData('general', () => client.getSingle('g
 const { data: projects } = await useAsyncData('projects', () => client.getAllByType('project'))
 
 onMounted(() => {
-  const lenis = new Lenis({duration: 1.8, smoothTouch: true})
+  const lenis = new Lenis({duration: 1.8})
   lenis.on('scroll', () => {})
 
   function raf(time:number) {

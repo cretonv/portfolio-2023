@@ -15,7 +15,7 @@ definePageMeta({
 const mainContent = ref<HTMLElement>()
 
 onMounted(() => {
-  const lenis = new Lenis({duration: 1.8, smoothTouch: true})
+  const lenis = new Lenis({duration: 1.8})
   lenis.on('scroll', () => {})
 
   function raf(time:number) {
