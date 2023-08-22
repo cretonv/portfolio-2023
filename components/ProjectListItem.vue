@@ -87,7 +87,7 @@ const toggleOpening = () => {
                 Voir la page du projet`
               </LinkInline>
               <LinkInline
-                  v-if="project.data.url"
+                  v-if="project.data.url.url"
                   :link="project.data.url.url"
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
