@@ -1,5 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  css: [
+    "~/assets/main.css",
+  ],
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -14,5 +17,8 @@ export default defineNuxtConfig({
       routes: ['/', '/projets'],
       ignore: ['/WaitingScreenView', '/ProjectsListView']
     }
-  }
+  },
+  link: [
+    { rel: 'icon', type: 'image/x-icon', href: '/public/svg/favicon.svg' }
+  ]
 })
