@@ -4,8 +4,6 @@ import Presentation from "~/components/Presentation.vue";
 import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
 import {definePageMeta} from "#imports";
-import pageTransition from "~/helpers/transitionConfig";
-import gsap from "gsap";
 import transitionConfig from "~/helpers/transitionConfig";
 
 definePageMeta({
