@@ -31,6 +31,8 @@ const toggleOpening = () => {
       <div
           class="h-0 overflow-hidden float-right"
           ref="imgContent"
+          @mouseleave="buttonHover = false"
+          @mouseover="buttonHover = true"
       >
         <div
             class="relative w-80 h-full bg-white transition-all duration-1000"
