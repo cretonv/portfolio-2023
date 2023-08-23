@@ -20,7 +20,4 @@ export default defineNuxtConfig({
       ignore: ['/WaitingScreenView', '/ProjectsListView']
     }
   },
-  link: [
-    { rel: 'icon', type: 'image/svg', href: '/public/svg/favicon.svg' }
-  ]
 })
