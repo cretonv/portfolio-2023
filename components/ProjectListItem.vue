@@ -3,27 +3,46 @@ import {ref} from "vue";
 import {gsap} from "gsap";
 import LinkInline from "~/components/LinkInline.vue";
 
-defineProps<{
+const props =  defineProps<{
   project: object
 }>()
+const emit = defineEmits(['onOpen'])
+
 const imgContent = ref()
 const content = ref()
 const buttonHover = ref(false)
-let open = false
+let projectId = ref()
+let open = ref(false)
 
 const toggleOpening = () => {
+  if(open.value) {
+    close()
+  } else {
+    emit('onOpen', props.project.id)
+    imgContent.value.parentElement.classList.add('open')
+    const tl = gsap.timeline()
+    tl.to(content.value, {duration: 0.7, height: "auto"}).to(imgContent.value, {duration: 0.7, height: "100%"})
+    open.value = true
+  }
+}
+const close = () => {
   if(open) {
     imgContent.value.parentElement.classList.remove('open')
     gsap.to(imgContent.value, {duration: 0.7, height: 0})
     gsap.to(content.value, {duration: 0.7, height: 0})
-    open = false
-  } else {
-    imgContent.value.parentElement.classList.add('open')
-    const tl = gsap.timeline()
-    tl.to(content.value, {duration: 0.7, height: "auto"}).to(imgContent.value, {duration: 0.7, height: "100%"})
-    open = true
+    open.value = false
   }
 }
+
+onMounted(() => {
+  projectId.value = props.project.id
+})
+
+defineExpose({
+  close,
+  open,
+  projectId
+})
 </script>
 <template>
   <div class="flex w-full items-stretch">

@@ -8,7 +8,6 @@ const pageTransition = {
     },
     onEnter: (el, done) => {
         const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
-        console.log(transitionLayer)
         gsap
             .timeline({
                 paused: true,
