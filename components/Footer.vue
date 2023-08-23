@@ -6,10 +6,6 @@ import LinkInline from "~/components/LinkInline.vue";
 import {onMounted, onUpdated} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import getSong from "~/helpers/spotifyNowPlaying"
-
-const song = await getSong()
-console.log(song)
 
 const props = defineProps<{
   mainContent: HTMLElement
@@ -101,6 +97,9 @@ onUpdated(() => {
             </LinkInline>
           </div>
         </div>
+      </div>
+      <div class="mb-8 -md:mb-6 w-full">
+        <Spotify />
       </div>
       <FooterQuote
           v-if="footer.data.quotes"
