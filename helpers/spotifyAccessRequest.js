@@ -1,27 +1,42 @@
-const spotifyWorker = {
-    getAccessToken: () => {
-        const url = "https://accounts.spotify.com/api/token";
-        const data = new URLSearchParams();
-        data.append("grant_type", "client_credentials");
-        data.append("client_id", "cb483e990f184740a8604df1ba88e1ee");
-        data.append("client_secret", "34ee48ed01ae43239158b970f32bbda0");
+import {useRuntimeConfig} from "#app";
+import {Buffer} from "buffer";
 
-        fetch(url, {
-            method: "POST",
+const spotifyWorker = {
+
+    getAccessToken: async () => {
+        const config = useRuntimeConfig()
+
+        const client_id = config.public.spotifyClientId
+        const client_secret = config.public.spotifyClientSecret
+        const refresh_token = config.public.spotifyRefreshToken
+
+        const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
+        const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
+
+        const data = new URLSearchParams();
+        data.append("grant_type", "refresh_token");
+        data.append("refresh_token", refresh_token);
+
+        const response = await fetch(TOKEN_ENDPOINT, {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                Authorization: `Basic ${basic}`,
+                'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: data
+            body: data,
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
+        return response.json()
+    },
+
+    getNowPlaying: async () => {
+        const { access_token } = await spotifyWorker.getAccessToken()
+        const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`
+        return fetch(NOW_PLAYING_ENDPOINT, {
+            headers: {
+                Authorization: `Bearer ${access_token}`,
+            },
+        })
     }
 }
-
 
 export default spotifyWorker;

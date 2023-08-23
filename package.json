@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.19",
+    "dotenv": "^16.3.1",
     "gsap": "^3.12.2",
     "split-type": "^0.3.3"
   }

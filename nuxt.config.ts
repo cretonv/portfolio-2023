@@ -20,4 +20,13 @@ export default defineNuxtConfig({
       ignore: ['/WaitingScreenView', '/ProjectsListView']
     }
   },
+  runtimeConfig: {
+    public: {
+      spotifyClientId: process.env.SPOTIFY_CLIENT_ID,
+      spotifyClientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+      spotifyCode: process.env.SPOTIFY_CODE,
+      spotifyAccessToken: process.env.SPOTIFY_ACCESS_TOKEN,
+      spotifyRefreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
+    },
+  },
 })
