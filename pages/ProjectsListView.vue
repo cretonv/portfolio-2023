@@ -2,9 +2,37 @@
 import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
 import transitionConfig from "~/helpers/transitionConfig";
+import gsap from "gsap";
 
 definePageMeta({
-  pageTransition: transitionConfig,
+  pageTransition: {
+    name: 'page-transiton',
+    mode: 'out-in',
+    onBeforeEnter: (el) => {
+      Array.from(el.children).find((element) => element.classList.contains('transition-layer'))?.classList.add('w-full')
+    },
+    onEnter: (el, done) => {
+      console.log('ENTER')
+      const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
+      gsap
+          .timeline({
+            paused: true,
+            onComplete() {
+              done();
+            },
+          })
+          .fromTo(transitionLayer, { width: '100vw'}, {width: 0, duration: 1.5})
+          .play();
+    },
+    onLeave: (el, done) => {
+      console.log('LEAVE')
+      const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
+      gsap
+          .timeline({ paused: true, onComplete: done })
+          .to(transitionLayer, { width: '100vw', duration: 1.5 })
+          .play();
+    },
+  },
   name: 'projects-list',
   path: '/projets',
 });
