@@ -2,7 +2,6 @@
 import getSong from "~/helpers/spotifyNowPlaying"
 const song = ref()
 song.value = await getSong()
-console.log(song.value)
 </script>
 <template>
   <div class="flex gap-3 items-stretch">

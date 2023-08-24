@@ -1,8 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-console.log(process.env.SPOTIFY_CLIENT_ID)
-console.log(process.env.SPOTIFY_CLIENT_SECRET)
-console.log(process.env.SPOTIFY_REFRESH_TOKEN)
-
 export default defineNuxtConfig({
   css: [
     "~/assets/main.css",
