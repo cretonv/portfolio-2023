@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+console.log(process.env)
+
 export default defineNuxtConfig({
   css: [
     "~/assets/main.css",

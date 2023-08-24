@@ -98,7 +98,7 @@ onUpdated(() => {
           </div>
         </div>
       </div>
-      <div class="mb-8 -md:mb-6 w-full">
+      <div class="mb-6 -md:mb-4 w-full">
         <Spotify />
       </div>
       <FooterQuote
