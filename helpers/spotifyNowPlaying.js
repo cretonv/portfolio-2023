@@ -2,6 +2,8 @@ import spotifyWorker from "~/helpers/spotifyAccessRequest";
 
 export default async function getSong() {
     const response = await spotifyWorker.getNowPlaying()
+    console.log('SPOTIFY RESPONSE :')
+    console.log(response)
 
     if (response.status === 204 || response.status > 400) {
         return { isPlaying: false }

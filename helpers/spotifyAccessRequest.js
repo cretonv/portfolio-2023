@@ -9,6 +9,10 @@ const spotifyWorker = {
         const client_id = config.public.spotifyClientId
         const client_secret = config.public.spotifyClientSecret
         const refresh_token = config.public.spotifyRefreshToken
+        console.log('SPOTIFY KEYS :')
+        console.log(client_id)
+        console.log(client_secret)
+        console.log(refresh_token)
 
         const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
         const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`
