@@ -99,7 +99,9 @@ onUpdated(() => {
         </div>
       </div>
       <div class="mb-6 -md:mb-4 w-full">
-        <Spotify />
+        <ClientOnly fallback-tag="div" fallback="Loading spotify component...">
+          <Spotify />
+        </ClientOnly>
       </div>
       <FooterQuote
           v-if="footer.data.quotes"
