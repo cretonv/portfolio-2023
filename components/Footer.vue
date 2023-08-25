@@ -3,7 +3,7 @@ import DotDark300 from "~/components/svg/dot/dotDark300.vue";
 import DotDark600 from "~/components/svg/dot/dotDark600.vue";
 import FooterQuote from "~/components/FooterQuote.vue";
 import LinkInline from "~/components/LinkInline.vue";
-import {onMounted, onUpdated} from "@vue/runtime-core";
+import {onUpdated} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
