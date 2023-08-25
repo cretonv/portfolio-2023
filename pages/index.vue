@@ -5,10 +5,12 @@ import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
 import {definePageMeta} from "#imports";
 import transitionConfig from "~/helpers/transitionConfig";
+import spotifyWorker from "~/helpers/spotifyAccessRequest";
 
 definePageMeta({
   pageTransition: transitionConfig
 })
+
 
 const mainContent = ref<HTMLElement>()
 
