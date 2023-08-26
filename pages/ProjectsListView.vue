@@ -4,12 +4,15 @@ import Lenis from "@studio-freight/lenis";
 import transitionConfig from "~/helpers/transitionConfig";
 import SplitType from "split-type";
 import {gsap} from "gsap";
+import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
 
 definePageMeta({
   pageTransition: transitionConfig,
   name: 'projects-list',
   path: '/projets',
 });
+
+const {firstVisitState, firstVisitComplete} = useFirstVisitComposable()
 
 const { client } = usePrismic()
 const {data: general } = await useAsyncData('general', () => client.getSingle('general'))
@@ -54,6 +57,11 @@ onMounted(() => {
       })
       lineCharCounter ++
     })
+  }
+})
+onBeforeUnmount(() => {
+  if(firstVisitState.isFirstVisit) {
+    firstVisitComplete()
   }
 })
 /**

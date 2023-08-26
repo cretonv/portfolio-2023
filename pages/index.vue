@@ -5,11 +5,13 @@ import Footer from "~/components/Footer.vue";
 import Lenis from "@studio-freight/lenis";
 import {definePageMeta} from "#imports";
 import transitionConfig from "~/helpers/transitionConfig";
+import {useFirstVisitComposable} from "../composables/firstVisitComposable"
 
 definePageMeta({
   pageTransition: transitionConfig
 })
 
+const {firstVisitState, firstVisitComplete} = useFirstVisitComposable()
 
 const mainContent = ref<HTMLElement>()
 
@@ -24,6 +26,12 @@ onMounted(() => {
 
   requestAnimationFrame(raf)
 
+})
+
+onBeforeUnmount(() => {
+  if(firstVisitState.isFirstVisit) {
+    firstVisitComplete()
+  }
 })
 
 const { client } = usePrismic()
