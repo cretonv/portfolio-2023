@@ -40,18 +40,11 @@ const close = () => {
 onMounted(() => {
   projectId.value = props.project.id
   gsap.from(item.value, {
-    scrollTrigger: item.value,
     opacity: 0,
     duration: 0.5,
     delay: 1.5 + 0.4 * props.index,
     ease: "sine.out"
   })
-  /* gsap.from(itemLine.value, {
-    width: (80 - 10 * props.index) + "%",
-    duration: 0.75,
-    delay: 1.5 + 0.4 * props.index,
-    ease: "sine.out"
-  }) */
 })
 
 defineExpose({

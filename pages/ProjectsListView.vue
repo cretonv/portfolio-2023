@@ -2,6 +2,8 @@
 import ProjectListItem from "~/components/ProjectListItem.vue";
 import Lenis from "@studio-freight/lenis";
 import transitionConfig from "~/helpers/transitionConfig";
+import SplitType from "split-type";
+import {gsap} from "gsap";
 
 definePageMeta({
   pageTransition: transitionConfig,
@@ -18,7 +20,9 @@ const { data: projects } = await useAsyncData('projects', () => client.getAllByT
   },
 }))
 
+const title = ref()
 const itemsComponents = ref([])
+let splitTitle
 
 onMounted(() => {
   const lenis = new Lenis({duration: 1.8})
@@ -30,6 +34,29 @@ onMounted(() => {
   }
 
   requestAnimationFrame(raf)
+
+  // To don't display h1 before load (without style)
+  title.value.classList.remove('opacity-0')
+  splitTitle = SplitType.create(title.value, {types: 'lines, chars'})
+  // Var use to make delay and stagger
+  let lineCharCounter: number
+
+  if(splitTitle.lines) {
+    splitTitle.lines.forEach((line) => {
+      lineCharCounter = 0
+      Array.from(line.children).forEach((char) => {
+        gsap.from(char, {
+          scrollTrigger: line,
+          y: 100 + 20 * lineCharCounter,
+          duration: 1.25,
+          delay: 0.25,
+          stagger: { amount: 1.3 * lineCharCounter },
+          ease: "sine.out"
+        })
+        lineCharCounter ++
+      }, )
+    })
+  }
 })
 /**
  * Method use to close open element when other element is open, trigger on opening element event
@@ -48,7 +75,9 @@ const onItemOpen = (openingItemId) => {
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen p-10">
     <div class="transition-layer z-20 fixed left-0 top-0 bg-black h-screen" />
-    <h1 class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10">{{general.data.projects_listing_title[0].text}}</h1>
+    <h1 ref="title" class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10 opacity-0 overflow-hidden">
+      {{general.data.projects_listing_title[0].text}}
+    </h1>
     <div class="flex flex-wrap w-full text-white font-lato -md:mt-16" v-if="projects">
       <ProjectListItem
           :key="project.id"
