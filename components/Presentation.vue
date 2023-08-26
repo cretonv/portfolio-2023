@@ -3,6 +3,11 @@ import DefaultButton from "~/components/DefaultButton.vue";
 import {onMounted, onBeforeUnmount} from "@vue/runtime-core";
 import SplitType from "split-type";
 import {gsap} from "gsap";
+import {useTransitionComposable} from "~/composables/transitionComposable";
+import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
+
+const {transitionState} = useTransitionComposable()
+const {firstVisitState} = useFirstVisitComposable()
 
 defineProps<{
   data: object
@@ -15,9 +20,25 @@ const text = ref()
 const photo = ref()
 let splitTitle
 
+watch(
+    () => transitionState.transitionComplete,
+    (state) => {
+      if (state) {
+        initGsap()
+      }
+    }
+)
+
 onMounted(() => {
+  if (transitionState.transitionComplete || firstVisitState.isFirstVisit) {
+    initGsap()
+  }
+})
+
+const initGsap = () => {
   // To don't display h1 before load (without style)
   title.value.classList.remove('opacity-0')
+  photo.value.classList.remove('opacity-0')
   splitTitle = SplitType.create(title.value, {types: 'words, chars'})
   // Var use to make delay and stagger
   let lineCharCounter: number
@@ -49,7 +70,7 @@ onMounted(() => {
     delay: 2.25,
     duration: 1.5,
   })
-})
+}
 
 onBeforeUnmount(() => {
   SplitType.revert(title.value)
@@ -65,7 +86,7 @@ const getMousePosition = (e: MouseEvent) => {
 <template>
   <div @mousemove="getMousePosition" class="flex px-10 items-start flex-wrap h-[568px]">
     <div v-if="data.primary" class="w-2/3 flex flex-wrap justify-center text-white -md:w-full -md:order-2">
-      <h2 ref="title" class="w-full text-4xl font-title">{{data.primary.title[0].text}}</h2>
+      <h2 ref="title" class="w-full text-4xl font-title opacity-0">{{data.primary.title[0].text}}</h2>
       <div ref="text" class="w-3/4 text-xl mt-8 font-lato -md:w-full -md:text-lg opacity-0">
         {{data.primary.text[0].text}}
         <div class="w-fit" ref="container">
@@ -75,7 +96,7 @@ const getMousePosition = (e: MouseEvent) => {
     </div>
     <div
         ref="photo"
-        class="w-1/3 h-[568px] -md:w-full -md:order-1 -md:h-[284px] -md:mb-8 overflow-hidden"
+        class="w-1/3 h-[568px] -md:w-full -md:order-1 -md:h-[284px] -md:mb-8 overflow-hidden opacity-0"
         v-if="data.primary"
     >
       <img class="object-cover object-center w-full h-[568px]" :src="data.primary.image.url" :alt="data.primary.image.alt">
