@@ -1,4 +1,7 @@
 import gsap from 'gsap';
+import { useTransitionComposable } from '../composables/transitionComposable'
+
+const { toggleTransitionComplete } = useTransitionComposable()
 
 const pageTransition = {
     name: 'page-transiton',
@@ -12,6 +15,7 @@ const pageTransition = {
             .timeline({
                 paused: true,
                 onComplete() {
+                    toggleTransitionComplete(true)
                     done();
                 },
             })
@@ -19,6 +23,7 @@ const pageTransition = {
             .play();
     },
     onLeave: (el, done) => {
+        toggleTransitionComplete(false)
         const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
         gsap
             .timeline({ paused: true, onComplete: done })
