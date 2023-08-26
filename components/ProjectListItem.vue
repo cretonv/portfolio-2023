@@ -41,8 +41,8 @@ onMounted(() => {
   projectId.value = props.project.id
   gsap.from(item.value, {
     opacity: 0,
-    duration: 0.5,
-    delay: 1.5 + 0.4 * props.index,
+    duration: 0.25,
+    delay: 1.5 + 0.35 * props.index,
     ease: "sine.out"
   })
 })
