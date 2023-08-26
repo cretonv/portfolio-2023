@@ -18,24 +18,22 @@ let splitTitle
 onMounted(() => {
   // To don't display h1 before load (without style)
   title.value.classList.remove('opacity-0')
-  splitTitle = SplitType.create(title.value, {types: 'lines, chars'})
+  splitTitle = SplitType.create(title.value, {types: 'words, chars'})
   // Var use to make delay and stagger
   let lineCharCounter: number
 
-  if(splitTitle.lines) {
-    splitTitle.lines.forEach((line) => {
-      lineCharCounter = 0
-      Array.from(line.children).forEach((char) => {
+  if(splitTitle.chars) {
+    lineCharCounter = 0
+    splitTitle.chars.forEach((char) => {
         gsap.from(char, {
-          scrollTrigger: line,
+          scrollTrigger: title.value,
           y: 100 + 20 * lineCharCounter,
           duration: 1.25,
           delay: 0.25,
           stagger: { amount: 1.3 * lineCharCounter },
           ease: "sine.out"
         })
-        lineCharCounter ++
-      }, )
+      lineCharCounter ++
     })
   }
 
