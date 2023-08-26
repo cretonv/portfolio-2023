@@ -4,15 +4,18 @@ import {gsap} from "gsap";
 import LinkInline from "~/components/LinkInline.vue";
 
 const props =  defineProps<{
-  project: object
+  project: object,
+  index: number
 }>()
 const emit = defineEmits(['onOpen'])
 
 const imgContent = ref()
 const content = ref()
 const buttonHover = ref(false)
-let projectId = ref()
-let open = ref(false)
+const projectId = ref()
+const open = ref(false)
+const item = ref()
+const itemLine = ref()
 
 const toggleOpening = () => {
   if(open.value) {
@@ -36,6 +39,19 @@ const close = () => {
 
 onMounted(() => {
   projectId.value = props.project.id
+  gsap.from(item.value, {
+    scrollTrigger: item.value,
+    opacity: 0,
+    duration: 0.5,
+    delay: 1.5 + 0.4 * props.index,
+    ease: "sine.out"
+  })
+  /* gsap.from(itemLine.value, {
+    width: (80 - 10 * props.index) + "%",
+    duration: 0.75,
+    delay: 1.5 + 0.4 * props.index,
+    ease: "sine.out"
+  }) */
 })
 
 defineExpose({
@@ -45,7 +61,7 @@ defineExpose({
 })
 </script>
 <template>
-  <div class="flex w-full items-stretch">
+  <div ref="item" class="flex w-full items-stretch opacity-100">
     <div class="w-5/12 py-8 pr-12  -md:hidden">
       <div
           class="h-0 overflow-hidden float-right"
@@ -73,7 +89,7 @@ defineExpose({
         <div v-if="project.data.year" class="w-fit font-light">{{project.data.year}}</div>
       </div>
       <!-- CONTENT -->
-      <div class="transition-all duration-700 overflow-hidden h-auto item-content pb-4">
+      <div class="relative transition-all duration-700 overflow-hidden h-auto item-content pb-4">
         <div ref="content" class="h-0">
           <div class="flex gap-10 pt-8 h-auto -md:flex-wrap -md:gap-6">
             <div v-if="project.data.resume" class="w-1/2 -md:w-full">
@@ -120,14 +136,12 @@ defineExpose({
             </div>
           </div>
         </div>
+        <div ref="itemLine" class="item-line absolute bottom-0 left-0 w-full h-px bg-white" />
       </div>
     </div>
   </div>
 </template>
 <style scoped>
-.item-content {
-  border-bottom: solid 1px #FFFFFF;
-}
 .techno-item:not(:last-child)::after  {
   content: "·";
   margin-left: 8px;

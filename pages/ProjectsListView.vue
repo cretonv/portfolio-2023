@@ -55,6 +55,7 @@ const onItemOpen = (openingItemId) => {
           v-for="(project, index) in projects"
           :ref="(el) => (itemsComponents[index] = el)"
           :project="project"
+          :index="index"
           class="project-list-item"
           @on-open="onItemOpen"
       />
