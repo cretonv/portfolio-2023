@@ -42,7 +42,7 @@ onUpdated(() => {
         <div class="w-1/2 -md:w-full -md:mb-6">
           <img src="/svg/name.svg" alt="Name text" class="w-full h-auto">
           <div class="flex flex-col float-right -md:float-left">
-            <a :href="'mailto' + footer.data.email" class="mt-7 block font-porpora -md:mt-6">
+            <a :href="'mailto:' + footer.data.email" class="mt-7 block font-porpora -md:mt-6">
               {{footer.data.email}}
             </a>
             <div class="mt-12 -md:mt-6">
