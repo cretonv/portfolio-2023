@@ -80,12 +80,13 @@ const onItemOpen = (openingItemId) => {
 </script>
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen p-10">
-    <div class="transition-layer z-20 fixed left-0 top-0 h-screen overflow-hidden flex justify-end w-0 pointer-events-none">
+    <TransitionLayer />
+    <!--<div class="transition-layer z-20 fixed left-0 top-0 h-screen overflow-hidden flex justify-end w-0 pointer-events-none">
       <div class="brick-layer bg-brick absolute left-0 top-0 h-screen w-0 origin-center z-1"/>
       <div class="orange-layer bg-orange absolute left-0 top-0 h-screen w-0 blur-md z-1"/>
       <div class="yellow-layer bg-yellow absolute left-0 top-0 h-screen w-0 blur-md z-1"/>
       <div class="black-layer bg-black absolute left-0 top-0 h-screen w-0 blur-md z-10 scale-110 orgin-center"/>
-    </div>
+    </div>-->
     <h1 ref="title" class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10 opacity-0 overflow-hidden">
       {{general.data.projects_listing_title[0].text}}
     </h1>
