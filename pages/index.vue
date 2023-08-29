@@ -46,8 +46,18 @@ const presentationBlock = computed(() => {
 })
 </script>
 <template>
-  <div class="relative bg-black">
-    <div class="transition-layer z-20 fixed left-0 top-0 bg-black h-screen" />
+  <div class="relative bg-black overflow-hidden">
+    <div class="transition-layer z-20 fixed left-0 top-0 h-screen overflow-hidden flex justify-end w-0 pointer-events-none">
+      <div class="brick-layer bg-brick absolute left-0 top-0 h-screen w-0 origin-center z-1"/>
+      <div class="orange-layer bg-orange absolute left-0 top-0 h-screen w-0 blur-md z-1"/>
+      <div class="yellow-layer bg-yellow absolute left-0 top-0 h-screen w-0 blur-md z-1"/>
+      <div class="black-layer bg-black absolute left-0 top-0 h-screen w-0 blur-md z-10 scale-125 orgin-center"/>
+      <!-- <div class="colors-layer absolute right-[8.333333%] top-0 w-24 h-full flex blur-md w-1/12 z-1">
+        <div class="h-full bg-brick"/>
+        <div class="h-full bg-orange"/>
+        <div class="h-full bg-yellow"/>
+      </div> -->
+    </div>
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4">
       <HomeHero />
       <Presentation class="mt-8" :data="presentationBlock" />

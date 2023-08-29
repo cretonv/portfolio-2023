@@ -27,6 +27,15 @@ export default {
           DEFAULT: "#ffffff",
           secondary: "#D9D9D9"
         },
+        orange: {
+          DEFAULT: "#FFA723"
+        },
+        brick: {
+          DEFAULT: "#953621"
+        },
+        yellow: {
+          DEFAULT: "#FFDC5F"
+        }
       },
     },
   },
