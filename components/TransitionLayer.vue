@@ -4,7 +4,7 @@
       <path
           class="morph"
           d="M639.37 828C114.196 828 0 829 0 829V832H1280V829C1280 829 1164.54 828 639.37 828Z"
-          fill="#FFA723"
+          fill="#FFF4E4"
       ></path>
     </svg>
   </div>

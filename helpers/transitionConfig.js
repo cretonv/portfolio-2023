@@ -13,7 +13,7 @@ const pageTransition = {
     onEnter: (el, done) => {
         const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
         gsap.from(transitionLayer, {
-            backgroundColor: '#FFA723',
+            backgroundColor: '#FFF4E4',
             duration: 2,
             onComplete() {
                 toggleTransitionComplete(true)
