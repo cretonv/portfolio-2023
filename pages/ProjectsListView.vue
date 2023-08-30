@@ -25,6 +25,7 @@ const { data: projects } = await useAsyncData('projects', () => client.getAllByT
 
 const title = ref()
 const itemsComponents = ref([])
+const mainContent = ref()
 let splitTitle
 
 onMounted(() => {
@@ -79,22 +80,25 @@ const onItemOpen = (openingItemId) => {
 }
 </script>
 <template>
-  <div class="relative bg-black min-h-screen h-full w-screen p-10">
+  <div class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
-    <h1 ref="title" class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10 opacity-0 overflow-hidden">
-      {{general.data.projects_listing_title[0].text}}
-    </h1>
-    <div class="flex flex-wrap w-full text-white font-lato -md:mt-16" v-if="projects">
-      <ProjectListItem
-          :key="project.id"
-          v-for="(project, index) in projects"
-          :ref="(el) => (itemsComponents[index] = el)"
-          :project="project"
-          :index="index"
-          class="project-list-item"
-          @on-open="onItemOpen"
-      />
-    </div>
+    <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen">
+      <h1 ref="title" class="absolute left-0 top-0 font-title text-white text-4xl pt-12 pl-10 opacity-0 overflow-hidden">
+        {{general.data.projects_listing_title[0].text}}
+      </h1>
+      <div class="flex flex-wrap w-full text-white font-lato -md:mt-16 pb-8" v-if="projects">
+        <ProjectListItem
+            :key="project.id"
+            v-for="(project, index) in projects"
+            :ref="(el) => (itemsComponents[index] = el)"
+            :project="project"
+            :index="index"
+            class="project-list-item"
+            @on-open="onItemOpen"
+        />
+      </div>
+    </section>
+    <Footer :mainContent="mainContent" style="z-index: 0" class="relative" />
   </div>
 </template>
 <style>
