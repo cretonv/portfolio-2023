@@ -12,16 +12,25 @@ const pageTransition = {
     },*/
     onEnter: (el, done) => {
         const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
+        gsap.from(transitionLayer, {
+            backgroundColor: '#FFA723',
+            duration: 2,
+            onComplete() {
+                toggleTransitionComplete(true)
+                done()
+            }
+        })
+    },
+    onBeforeLeave: (el) => {
+        const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
         const morphSvg = Array.from(transitionLayer.children).find((element) => element.classList.contains('morph-svg'))
-        const morphPath = Array.from(morphSvg.children).find((element) => element.classList.contains('morph'))
-        done()
+        morphSvg.classList.remove('opacity-0')
     },
     onLeave: (el, done) => {
         toggleTransitionComplete(false)
         const transitionLayer = Array.from(el.children).find((element) => element.classList.contains('transition-layer'))
         const morphSvg = Array.from(transitionLayer.children).find((element) => element.classList.contains('morph-svg'))
         const morphPath = Array.from(morphSvg.children).find((element) => element.classList.contains('morph'))
-        console.log(morphPath)
 
         const tl = anime.timeline({
             targets: morphPath,
