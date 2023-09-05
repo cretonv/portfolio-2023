@@ -82,9 +82,10 @@ const onItemOpen = (openingItemId) => {
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
-    <BackButton class="absolute left-16 top-2 z-10 -md:left-10"/>
-    <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen">
-      <h1 ref="title" class="absolute left-0 top-1 font-title text-white text-4xl pt-12 pl-16 opacity-0 overflow-hidden -md:pl-10">
+    <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen pt-13">
+      <div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>
+      <BackButton class="absolute left-16 top-2 z-10 -md:left-10"/>
+      <h1 ref="title" class="absolute left-0 top-1 font-title text-white text-4xl pt-14 pl-16 opacity-0 overflow-hidden -md:pl-10">
         {{general.data.projects_listing_title[0].text}}
       </h1>
       <div class="flex flex-wrap w-full text-white font-lato -md:mt-16 pb-8" v-if="projects">
