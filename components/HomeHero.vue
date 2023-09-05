@@ -81,7 +81,7 @@ const toggleCursorVisibility = (newState: boolean) => {
     </div>
     <BrokenCircle class="absolute top-[20%] right-[7.5%] z-0" :container="container" />
     <Name class="absolute bottom-6 right-4"> vincent creton </Name>
-    <div ref="cursorFilter" class="cursor" :class="cursorState.visible ? 'opacity-1' : 'opacity-0'">
+    <div ref="cursorFilter" class="cursor" :class="cursorState.visible ? 'opacity-90' : 'opacity-0'">
       <cursorBorder />
     </div>
   </div>
