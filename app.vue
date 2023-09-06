@@ -7,9 +7,10 @@ import {ref} from "vue";
 const {initCustomCursor, setXandY} = useCustomCursorComposable()
 const pageContainer = ref()
 const customCursorElement = ref()
+const customCursorHoverShadow = ref()
 
 onMounted(() => {
-  initCustomCursor(pageContainer.value, customCursorElement.value)
+  initCustomCursor(pageContainer.value, customCursorElement.value, customCursorHoverShadow.value)
 })
 
 const setCursorCoordinates = (e: MouseEvent) => {
@@ -18,7 +19,9 @@ const setCursorCoordinates = (e: MouseEvent) => {
 </script>
 <template>
   <div ref="pageContainer" @mousemove="setCursorCoordinates" class="relative">
-    <div ref="customCursorElement" class="custom-main-cursor"/>
+    <div ref="customCursorElement" class="custom-main-cursor">
+      <div ref="customCursorHoverShadow" class="cursor-hover-shadow"/>
+    </div>
     <NuxtPage/>
   </div>
 </template>

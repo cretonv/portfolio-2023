@@ -22,4 +22,17 @@ button:hover {
     left: 0;
     top: 0;
     z-index: 9999;
+    overflow: visible;
+}
+
+.cursor-hover-shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    background-color: #FFA723;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    pointer-events: none;
 }

@@ -4,6 +4,7 @@ import { reactive } from 'vue';
 const cursorAttributes = reactive({
     cursorElement: null,
     container: null,
+    cursorHoverShadow: null,
     visible: true,
     hover: false
 })
@@ -11,10 +12,11 @@ const cursorAttributes = reactive({
 const mouse = { x: 0, y: 0 }
 
 export const useCustomCursorComposable =  () => {
-    const initCustomCursor = (container, cursorElement) => {
+    const initCustomCursor = (container, cursorElement, cursorHoverShadow) => {
         if(cursorElement && container) {
             cursorAttributes.cursorElement = cursorElement
             cursorAttributes.container = container
+            cursorAttributes.cursorHoverShadow = cursorHoverShadow
 
             gsap.set( cursorAttributes.cursorElement, {xPercent: -50, yPercent: -50});
 
@@ -56,9 +58,27 @@ export const useCustomCursorComposable =  () => {
     const toggleMainCursorToHover = (newState) => {
         cursorAttributes.hover = newState
         if(cursorAttributes.hover) {
-            gsap.to(cursorAttributes.cursorElement,{backgroundColor: "#FFA723", duration: 0.3})
+            gsap.set(cursorAttributes.cursorHoverShadow, {opacity: 0.5})
+            gsap.to(cursorAttributes.cursorHoverShadow, {scale: 4, duration: 0.3})
+            gsap.to(
+                cursorAttributes.cursorElement,
+                {
+                    backgroundColor: "#FFA723",
+                    scale: 0.5,
+                    duration: 0.3
+                }
+            )
         } else {
-            gsap.to(cursorAttributes.cursorElement,{backgroundColor: "#FFF", duration: 0.3})
+            gsap.to(cursorAttributes.cursorHoverShadow, {scale: 1, duration: 0.3})
+            gsap.to(
+                cursorAttributes.cursorElement,
+                {
+                    backgroundColor: "#FFF",
+                    scale: 1,
+                    duration: 0.3
+                }
+            )
+            gsap.set(cursorAttributes.cursorHoverShadow, {opacity: 0, delay: 0.3})
         }
     }
 
