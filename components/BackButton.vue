@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import {useCustomCursorComposable} from "~/composables/customCursorComposable";
+
+const {toggleMainCursorToHover} = useCustomCursorComposable()
 const props = defineProps<{
   target: string
 }>()
@@ -15,7 +18,12 @@ const goToTarget = async () => {
 }
 </script>
 <template>
-  <div class="back-button flex items-center gap-3 cursor-pointer" @mousedown="goToTarget">
+  <div
+    class="back-button flex items-center gap-3"
+    @mousedown="goToTarget"
+    @mouseover="toggleMainCursorToHover(true)"
+    @mouseleave="toggleMainCursorToHover(false)"
+  >
     <svg width="57" height="34" viewBox="0 0 57 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M40.7144 17.6426L19.0001 17.6426" stroke="#D9D9D9" stroke-width="0.827143"/>
         <path d="M25.7859 27.1426C25.7859 20.6283 20.3574 18.3212 17.6431 17.6426C20.3574 17.1902 25.7859 14.114 25.7859 8.14258" stroke="#D9D9D9" stroke-width="0.827143"/>
