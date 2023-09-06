@@ -14,6 +14,7 @@ const setColor = (hover: false) => {
   }
 }
 const goToTarget = async () => {
+  toggleMainCursorToHover(false)
   await navigateTo('/')
 }
 </script>
