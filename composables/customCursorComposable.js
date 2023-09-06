@@ -4,7 +4,8 @@ import { reactive } from 'vue';
 const cursorAttributes = reactive({
     cursorElement: null,
     container: null,
-    visible: true
+    visible: true,
+    hover: false
 })
 
 const mouse = { x: 0, y: 0 }
@@ -52,9 +53,19 @@ export const useCustomCursorComposable =  () => {
         }
     }
 
+    const toggleMainCursorToHover = (newState) => {
+        cursorAttributes.hover = newState
+        if(cursorAttributes.hover) {
+            gsap.to(cursorAttributes.cursorElement,{backgroundColor: "#FFA723", duration: 0.3})
+        } else {
+            gsap.to(cursorAttributes.cursorElement,{backgroundColor: "#FFF", duration: 0.3})
+        }
+    }
+
     return {
         initCustomCursor,
         setXandY,
-        toggleMainCursorVisibility
+        toggleMainCursorVisibility,
+        toggleMainCursorToHover
     };
 }

@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import dotsTypes from '../assets/dotsTypes.ts'
 import {computed, defineAsyncComponent} from "vue";
+import {useCustomCursorComposable} from "~/composables/customCursorComposable";
+
+const {toggleMainCursorToHover} = useCustomCursorComposable()
 const props = defineProps({
     dotType: {
         type: String,
@@ -35,10 +38,17 @@ const Svg = computed(() => {
 })
 </script>
 <template>
-  <a class="flex items-center" :class="darkMode? 'text-black dark' : 'text-beige'" :href="link" :target="target">
-      <Svg class="mr-2" />
-      <div class="relative uppercase text-sm"><slot /></div>
-  </a>
+    <a
+        class="flex items-center"
+        :class="darkMode? 'text-black dark' : 'text-beige'"
+        :href="link"
+        :target="target"
+        @mouseover="toggleMainCursorToHover(true)"
+        @mouseleave="toggleMainCursorToHover(false)"
+    >
+        <Svg class="mr-2" />
+        <div class="relative uppercase text-sm"><slot /></div>
+    </a>
 </template>
 <style>
 a > div::after {

@@ -4,6 +4,11 @@
 
 body {
     font-family: 'lato', sans-serif;
+    cursor: none !important;
+}
+a:hover,
+button:hover {
+    cursor: none !important;;
 }
 
 .custom-main-cursor {
