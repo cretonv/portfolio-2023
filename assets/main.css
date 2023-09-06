@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body {
     font-family: 'lato', sans-serif;
+}
+
+.custom-main-cursor {
+    height: 16px;
+    width: 16px;
+    background: #FFF;
+    border-radius: 50%;
+    opacity: 1;
+    pointer-events: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
 }

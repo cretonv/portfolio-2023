@@ -7,11 +7,13 @@ import {ref, reactive} from "vue";
 import {onMounted} from "@vue/runtime-core";
 import {useTransitionComposable} from "~/composables/transitionComposable";
 import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
+import {useCustomCursorComposable} from "~/composables/customCursorComposable";
 import {gsap} from "gsap";
 import CursorBorder from "~/components/svg/cursorBorder.vue";
 
 const {transitionState} = useTransitionComposable()
 const {firstVisitState} = useFirstVisitComposable()
+const {toggleMainCursorVisibility} = useCustomCursorComposable()
 
 const container = ref(null)
 const cursorFilter = ref(null)
@@ -37,7 +39,8 @@ onMounted(() => {
 const initGsap = () => {
   if(cursorFilter.value && container.value) {
 
-    gsap.set(cursorFilter.value, {xPercent: -50, yPercent: -50});
+    gsap.set(cursorFilter.value, {xPercent: -50, yPercent: -50, scaleX: 0.12, scaleY: 0.12});
+
 
     const pos = { x: container.value.offsetWidth / 2, y: container.value.offsetHeight / 2 };
     const speed = 0.2;
@@ -65,6 +68,13 @@ const setXandY = (e) => {
 }
 const toggleCursorVisibility = (newState: boolean) => {
   cursorState.visible = newState
+  if(cursorState.visible) {
+    gsap.to(cursorFilter.value, {scaleX: 1, scaleY: 1, duration: 0.5});
+    toggleMainCursorVisibility(false)
+  } else {
+    gsap.to(cursorFilter.value, {scaleX: 0.12, scaleY: 0.12, duration: 0.5});
+    toggleMainCursorVisibility(true)
+  }
 }
 </script>
 <template>
@@ -74,7 +84,7 @@ const toggleCursorVisibility = (newState: boolean) => {
       <TitleH1
           class="mb-14 select-none"
           @mouseover="toggleCursorVisibility(true)"
-          @mouseout="toggleCursorVisibility(false)"
+          @mouseleave="toggleCursorVisibility(false)"
       >
         Développeur <br/> FRONT-END <br/> créatif
       </TitleH1>
@@ -98,7 +108,7 @@ const toggleCursorVisibility = (newState: boolean) => {
   mix-blend-mode: difference;
   z-index: 99999;
   background-color: #fff;
-  transition: opacity 0.2s;
+  transition: scale 2s, opacity 0.2s;
   overflow: visible;
 }
 .cursor svg {
