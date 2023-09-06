@@ -6,6 +6,9 @@ import LinkInline from "~/components/LinkInline.vue";
 import {onUpdated} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useCustomCursorComposable} from "~/composables/customCursorComposable";
+
+const {toggleMainCursorToHover} = useCustomCursorComposable()
 
 const props = defineProps<{
   mainContent: HTMLElement
@@ -49,7 +52,13 @@ onUpdated(() => {
               <div class="uppercase text-sm font-porpora flex flex-col">
                 <span>Réseaux</span>
                 <div class="mt-4 flex gap-4">
-                  <a v-for="social in footer.data.socials" :href="social.url.url" :target="social.url.target">
+                  <a
+                    v-for="social in footer.data.socials"
+                    :href="social.url.url"
+                    :target="social.url.target"
+                    @mouseover="toggleMainCursorToHover(true)"
+                    @mouseleave="toggleMainCursorToHover(false)"
+                  >
                     <img class="h-13 w-auto" :src="social.icon.url" :alt="social.icon.alt">
                   </a>
                 </div>
