@@ -6,7 +6,8 @@ const cursorAttributes = reactive({
     container: null,
     cursorHoverShadow: null,
     visible: true,
-    hover: false
+    hover: false,
+    cursorAnimComplete: true,
 })
 
 const mouse = { x: 0, y: 0 }
@@ -58,6 +59,7 @@ export const useCustomCursorComposable =  () => {
     const toggleMainCursorToHover = (newState) => {
         cursorAttributes.hover = newState
         if(cursorAttributes.hover) {
+            cursorAttributes.cursorAnimComplete = false
             gsap.set(cursorAttributes.cursorHoverShadow, {opacity: 0.5})
             gsap.to(cursorAttributes.cursorHoverShadow, {scale: 4, duration: 0.3})
             gsap.to(
@@ -65,20 +67,32 @@ export const useCustomCursorComposable =  () => {
                 {
                     backgroundColor: "#FFA723",
                     scale: 0.5,
-                    duration: 0.3
+                    duration: 0.3,
+                    onComplete: () => {
+                        cursorAttributes.cursorAnimComplete = true
+                    }
                 }
             )
         } else {
-            gsap.to(cursorAttributes.cursorHoverShadow, {scale: 1, duration: 0.3})
+            gsap.to(
+                cursorAttributes.cursorHoverShadow,
+                {
+                    scale: 1,
+                    duration: 0.3,
+                    onComplete: () => {
+                        if(cursorAttributes.cursorAnimComplete) {
+                            gsap.set(cursorAttributes.cursorHoverShadow, {opacity: 0})
+                        }
+                    }
+                })
             gsap.to(
                 cursorAttributes.cursorElement,
                 {
                     backgroundColor: "#FFF",
                     scale: 1,
-                    duration: 0.3
+                    duration: 0.3,
                 }
             )
-            gsap.set(cursorAttributes.cursorHoverShadow, {opacity: 0, delay: 0.3})
         }
     }
 

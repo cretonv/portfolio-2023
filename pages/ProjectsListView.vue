@@ -71,8 +71,6 @@ onBeforeUnmount(() => {
  */
 const onItemOpen = (openingItemId) => {
   itemsComponents.value.forEach((item) => {
-    console.log(item.projectId !== openingItemId)
-    console.log(item.open)
     if(item.projectId !== openingItemId && item.open) {
       item.close()
     }
@@ -83,7 +81,7 @@ const onItemOpen = (openingItemId) => {
   <div class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen pt-13">
-      <div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>
+      <!--<div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>-->
       <BackButton class="absolute left-16 top-2 z-10 -md:left-10"/>
       <h1 ref="title" class="absolute left-0 top-1 font-title text-white text-4xl pt-14 pl-16 opacity-0 overflow-hidden -md:pl-10">
         {{general.data.projects_listing_title[0].text}}

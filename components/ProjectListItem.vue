@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import {gsap} from "gsap";
-import LinkInline from "~/components/LinkInline.vue";
+import LinkInline from "~/components/LinkInline.vue";import {useCustomCursorComposable} from "~/composables/customCursorComposable";
 
+const {toggleMainCursorToHover} = useCustomCursorComposable()
 const props =  defineProps<{
   project: object,
   index: number
@@ -78,7 +79,14 @@ defineExpose({
     <div class="w-7/12 pt-4 px-4 flex-1 -md:w-full -md:px-0">
       <!-- HEADING -->
       <div class="flex items-end" @click="toggleOpening">
-        <h2 v-if="project.data.title" class="grow font-title text-4xl cursor-pointer">{{project.data.title[0].text}}</h2>
+        <h2
+          v-if="project.data.title"
+          class="grow font-title text-4xl"
+          @mouseover="toggleMainCursorToHover(true)"
+          @mouseleave="toggleMainCursorToHover(false)"
+        >
+          {{project.data.title[0].text}}
+        </h2>
         <div v-if="project.data.year" class="w-fit font-light">{{project.data.year}}</div>
       </div>
       <!-- CONTENT -->
