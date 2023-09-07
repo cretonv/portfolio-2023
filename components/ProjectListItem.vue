@@ -38,6 +38,11 @@ const close = () => {
   }
 }
 
+const goToProjectPage = async () => {
+  toggleMainCursorToHover(false)
+  await navigateTo({ name: 'projects-single', params: {uid: props.project.uid} })
+}
+
 onMounted(() => {
   projectId.value = props.project.id
   gsap.from(item.value, {
@@ -117,12 +122,12 @@ defineExpose({
             </div>
             <div class="w-1/2 flex items-end justify-end gap-4 -md:flex-wrap -md:justify-start -md:w-full">
               <LinkInline
-                  v-if="project.data.body.length > 0 && false"
+                  v-if="project.data.body.length > 0"
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
-                  link="#"
+                  @mousedown="goToProjectPage"
                   dot-type="300">
-                Voir la page du projet`
+                Voir la page du projet
               </LinkInline>
               <LinkInline
                   v-if="project.data.url.url"

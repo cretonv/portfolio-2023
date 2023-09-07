@@ -25,8 +25,8 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      routes: ['/', '/projets'],
-      ignore: ['/WaitingScreenView', '/ProjectsListView']
+      routes: ['/', '/projets', '/projets/:id'],
+      ignore: ['/WaitingScreenView', '/ProjectsListView', "/ProjectSingleView"]
     }
   },
   runtimeConfig: {

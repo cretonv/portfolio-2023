@@ -5,6 +5,7 @@ import transitionConfig from "~/helpers/transitionConfig";
 import SplitType from "split-type";
 import {gsap} from "gsap";
 import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
+import {usePrismic} from "@prismicio/vue";
 
 definePageMeta({
   pageTransition: transitionConfig,
