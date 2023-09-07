@@ -39,7 +39,7 @@ const Svg = computed(() => {
 </script>
 <template>
     <a
-        class="flex items-center"
+        class="flex items-center cursor-none"
         :class="darkMode? 'text-black dark' : 'text-beige'"
         :href="link"
         :target="target"

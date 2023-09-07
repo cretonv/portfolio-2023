@@ -20,7 +20,7 @@ const yTranslate = computed(() => {
 <template>
   <button
       v-if="mousePosition && container"
-      class="relative block px-4 py-2 border border-white rounded-full text-sm font-porpora bg-white-secondary/[.05]"
+      class="relative block px-4 py-2 border border-white rounded-full text-sm font-porpora bg-white-secondary/[.05] cursor-none"
       @mousedown="toggleMainCursorToHover(false)"
       @mouseover="toggleMainCursorToHover(true)"
       @mouseleave="toggleMainCursorToHover(false)"

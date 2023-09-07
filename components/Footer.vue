@@ -56,6 +56,7 @@ onUpdated(() => {
                     v-for="social in footer.data.socials"
                     :href="social.url.url"
                     :target="social.url.target"
+                    class="cursor-none"
                     @mouseover="toggleMainCursorToHover(true)"
                     @mouseleave="toggleMainCursorToHover(false)"
                   >
