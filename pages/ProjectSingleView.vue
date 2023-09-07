@@ -18,6 +18,7 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
+    <ProjectHero :thumbnail="project.data.thumbnail" />
     <div class="text-white">
       Ici on auras le single du projet {{$route.params.uid}} <br>
       En dessous le test des slices
