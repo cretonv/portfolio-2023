@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import transitionConfig from "~/helpers/transitionConfig";
+import Lenis from "@studio-freight/lenis";
 import {usePrismic} from "@prismicio/vue";
 import SliderImage from "~/components/slices/SliderImage.vue";
 import TextImage from "~/components/slices/TextImage.vue";
@@ -12,13 +13,32 @@ definePageMeta({
   path: '/projets/:uid',
 });
 
+onMounted(() => {
+  const lenis = new Lenis({duration: 1.8})
+  lenis.on('scroll', () => {
+  })
+
+  function raf(time: number) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
+})
+
 const { client } = usePrismic()
 const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
 </script>
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
-    <ProjectHero :thumbnail="project.data.thumbnail" />
+    <ProjectHero
+        :projectName="project.data.title[0].text"
+        :thumbnail="project.data.thumbnail"
+        :detailedYear="project.data.detailed_year"
+        :context="project.data.context"
+        :expertises="project.data.expertises"
+    />
     <div class="text-white">
       Ici on auras le single du projet {{$route.params.uid}} <br>
       En dessous le test des slices
