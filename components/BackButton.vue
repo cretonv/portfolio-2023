@@ -15,7 +15,11 @@ const setColor = (hover: false) => {
 }
 const goToTarget = async () => {
   toggleMainCursorToHover(false)
-  await navigateTo('/')
+  if (props.target) {
+    await navigateTo({name: props.target})
+  } else {
+    await navigateTo('/')
+  }
 }
 </script>
 <template>
