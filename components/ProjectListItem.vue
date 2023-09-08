@@ -120,7 +120,7 @@ defineExpose({
                 </li>
               </ul>
             </div>
-            <div class="w-1/2 flex items-end justify-end gap-4 -md:flex-wrap -md:justify-start -md:w-full">
+            <div class="w-1/2 flex items-end justify-between gap-4 -md:flex-wrap -md:justify-start -md:w-full">
               <LinkInline
                   v-if="project.data.body.length > 0"
                   @mouseleave="buttonHover = false"
