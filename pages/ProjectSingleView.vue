@@ -5,6 +5,7 @@ import {usePrismic} from "@prismicio/vue";
 import SliderImage from "~/components/slices/SliderImage.vue";
 import TextImage from "~/components/slices/TextImage.vue";
 import SimpleText from "~/components/slices/SimpleText.vue";
+import Image from "~/components/slices/Image.vue";
 
 const route = useRoute()
 
@@ -43,14 +44,10 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
         :context="project.data.context"
         :expertises="project.data.expertises"
     />
-    <div class="text-white">
-      Ici on auras le single du projet {{$route.params.uid}} <br>
-      En dessous le test des slices
-    </div>
     <div>
       <SliceZone
         :slices="project.data.body"
-        :components="{slider_image: SliderImage, text_image: TextImage, simple_text: SimpleText}" />
+        :components="{slider_image: SliderImage, text_image: TextImage, simple_text: SimpleText, image: Image}" />
     </div>
   </div>
 </template>
