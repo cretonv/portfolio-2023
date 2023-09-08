@@ -10,7 +10,7 @@ defineProps<{
 }>()
 </script>
 <template>
-  <div class="relative min-h-screen text-white flex flex-col justify-end">
+  <div class="relative min-h-screen text-white flex flex-col justify-end mb-10">
     <!--<div
       v-if="thumbnail.url"
       class="absolute top-0 left-0 w-full h-full"
