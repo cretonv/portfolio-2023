@@ -4,6 +4,7 @@ import Lenis from "@studio-freight/lenis";
 import {usePrismic} from "@prismicio/vue";
 import SliderImage from "~/components/slices/SliderImage.vue";
 import TextImage from "~/components/slices/TextImage.vue";
+import SimpleText from "~/components/slices/SimpleText.vue";
 
 const route = useRoute()
 
@@ -49,7 +50,7 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
     <div>
       <SliceZone
         :slices="project.data.body"
-        :components="{slider_image: SliderImage, text_image: TextImage}" />
+        :components="{slider_image: SliderImage, text_image: TextImage, simple_text: SimpleText}" />
     </div>
   </div>
 </template>
