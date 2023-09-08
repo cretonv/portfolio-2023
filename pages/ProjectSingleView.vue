@@ -30,7 +30,7 @@ const { client } = usePrismic()
 const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
 </script>
 <template>
-  <div class="relative bg-black min-h-screen h-full w-screen">
+  <div v-if="project" class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
     <div class="absolute z-10 left-10 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>
     <BackButton class="absolute z-10 left-24 top-6" target="projects-list" />
