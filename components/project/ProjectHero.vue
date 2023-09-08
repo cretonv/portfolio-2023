@@ -66,6 +66,6 @@ defineProps<{
   height: 100%;
   width: 100%;
   background-color: #000;
-  opacity: 0.35;
+  opacity: 0.45;
 }
 </style>
