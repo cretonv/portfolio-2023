@@ -3,6 +3,7 @@ import {defineProps} from "vue"
 defineProps<{
   projectName: string,
   thumbnail: object,
+  logo: object,
   detailedYear: string,
   context: string,
   expertises: [object]
@@ -25,6 +26,9 @@ defineProps<{
           class="absolute top-0 left-0 w-full h-full object-cover object-center z-0"
           :src="thumbnail.url"
           :alt="thumbnail.alt">
+    </div>
+    <div v-if="logo" class="logo absolute top-1/2 -translate-y-1/2 w-screen">
+      <img class="mx-auto h-[200px] w-auto" :src="logo.url" :alt="logo.alt">
     </div>
     <div class="hero-infos relative px-10 pt-24 w-screen h-auto">
       <div class="ml-10 pb-9 font-title text-6xl text-white border-white border-solid border-b-[0.5px]">{{projectName}}</div>

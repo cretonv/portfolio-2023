@@ -35,6 +35,7 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
     <ProjectHero
         :projectName="project.data.title[0].text"
         :thumbnail="project.data.thumbnail"
+        :logo="project.data.logo"
         :detailedYear="project.data.detailed_year"
         :context="project.data.context"
         :expertises="project.data.expertises"
