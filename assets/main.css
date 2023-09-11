@@ -36,3 +36,21 @@ button:hover {
     width: 16px;
     pointer-events: none;
 }
+
+.rich-text {
+    color: #D9D9D9;
+    font-family: "Lato";
+    font-size: 14px;
+    font-weight: 400;
+}
+.rich-text h2 {
+    color: #D9D9D9;
+    font-family: "Basteleur Moonlight";
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 16px;
+}
+.rich-text li {
+    list-style-type: circle;
+    margin-left: 16px;
+}
