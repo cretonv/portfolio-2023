@@ -54,3 +54,10 @@ button:hover {
     list-style-type: circle;
     margin-left: 16px;
 }
+
+@media screen and (max-width: 768px) {
+    .cursor-hover-shadow,
+    .custom-main-cursor {
+        display: none;
+    }
+}
