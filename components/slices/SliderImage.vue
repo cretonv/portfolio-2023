@@ -53,7 +53,7 @@ const initGsap = () => {
 }
 </script>
 <template>
-  <div ref="container" class="overflow-hidden">
+  <div ref="container" class="overflow-hidden my-24">
     <div ref="slider" class="flex w-fit pl-20 gap-4">
       <div v-for="slide in slice.items" class="h-56 w-80">
         <PrismicImage class="object-cover object-center w-full h-56 w-80" :field="slide.image" />

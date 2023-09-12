@@ -5,7 +5,7 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div v-if="slice.primary.text && slice.primary.image" class="flex items-stretch px-10 justify-between">
+  <div v-if="slice.primary.text && slice.primary.image" class="flex items-stretch px-10 justify-between my-24">
     <div class="pl-10 w-7/12 pr-4">
       <PrismicImage
           class="object-center w-full"
