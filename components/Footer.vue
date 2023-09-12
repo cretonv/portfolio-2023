@@ -3,11 +3,16 @@ import DotDark300 from "~/components/svg/dot/dotDark300.vue";
 import DotDark600 from "~/components/svg/dot/dotDark600.vue";
 import FooterQuote from "~/components/FooterQuote.vue";
 import LinkInline from "~/components/LinkInline.vue";
-import {onUpdated} from "@vue/runtime-core";
+import {onMounted, onUpdated} from "@vue/runtime-core";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import {useCustomCursorComposable} from "~/composables/customCursorComposable";
+import {useTransitionComposable} from "~/composables/transitionComposable";
+import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
+import {watch} from "vue";
 
+const {transitionState} = useTransitionComposable()
+const {firstVisitState} = useFirstVisitComposable()
 const {toggleMainCursorToHover} = useCustomCursorComposable()
 
 const props = defineProps<{
@@ -19,7 +24,25 @@ const { data: footer } = await useAsyncData('footer', () => client.getSingle('fo
 
 const footerContainer = ref()
 gsap.registerPlugin(ScrollTrigger)
+
+onMounted(() => {
+  if (transitionState.transitionComplete || firstVisitState.isFirstVisit) {
+    initGsap()
+  }
+})
+watch(
+    () => transitionState.transitionComplete,
+    (state) => {
+      if (state) {
+        initGsap()
+      }
+    }
+)
 onUpdated(() => {
+  initGsap()
+})
+
+const initGsap = () => {
   if(window.innerWidth > 768) {
     gsap.set(footerContainer.value, { yPercent: -50 })
     const uncover = gsap.timeline({ paused:true })
@@ -32,7 +55,7 @@ onUpdated(() => {
       scrub: true,
     })
   }
-})
+}
 </script>
 <template>
   <footer class="h-[75vh] w-full -md:h-fit">
