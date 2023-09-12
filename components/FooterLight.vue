@@ -40,7 +40,6 @@ onUpdated(() => {
 })
 
 const initGsap = () => {
-  console.log(window.innerWidth)
   if(window.innerWidth > 768) {
     gsap.set(footerContainer.value, { yPercent: -50 })
     const uncover = gsap.timeline({ paused:true })
