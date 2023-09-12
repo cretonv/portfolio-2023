@@ -84,7 +84,7 @@ const getMousePosition = (e: MouseEvent) => {
 }
 </script>
 <template>
-  <div @mousemove="getMousePosition" class="flex px-10 items-start flex-wrap h-[568px]">
+  <div @mousemove="getMousePosition" class="flex px-10 items-start flex-wrap h-[568px] -md:h-auto">
     <div v-if="data.primary" class="w-2/3 flex flex-wrap justify-center text-white -md:w-full -md:order-2">
       <h2 ref="title" class="w-full text-4xl font-title opacity-0">{{data.primary.title[0].text}}</h2>
       <div ref="text" class="w-3/4 text-xl mt-8 font-lato -md:w-full -md:text-lg opacity-0">
@@ -96,10 +96,10 @@ const getMousePosition = (e: MouseEvent) => {
     </div>
     <div
         ref="photo"
-        class="w-1/3 h-[568px] -md:w-full -md:order-1 -md:h-[284px] -md:mb-8 overflow-hidden opacity-0"
+        class="w-1/3 h-[568px] overflow-hidden opacity-0 -md:w-full -md:order-1 -md:h-[284px] -md:mb-8"
         v-if="data.primary"
     >
-      <img class="object-cover object-center w-full h-[568px]" :src="data.primary.image.url" :alt="data.primary.image.alt">
+      <img class="object-cover object-center w-full h-[568px] -md:h-[284px]" :src="data.primary.image.url" :alt="data.primary.image.alt">
     </div>
   </div>
 </template>
