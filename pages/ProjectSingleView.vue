@@ -7,6 +7,7 @@ import TextImage from "~/components/slices/TextImage.vue";
 import SimpleText from "~/components/slices/SimpleText.vue";
 import Image from "~/components/slices/Image.vue";
 import QuoteLine from "~/components/slices/QuoteLine.vue";
+import DoubleImage from "~/components/slices/DoubleImage.vue";
 
 const route = useRoute()
 
@@ -50,7 +51,14 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
     <div>
       <SliceZone
         :slices="project.data.body"
-        :components="{slider_image: SliderImage, text_image: TextImage, simple_text: SimpleText, image: Image, quote_line: QuoteLine}"
+        :components="{
+          slider_image: SliderImage,
+          text_image: TextImage,
+          simple_text: SimpleText,
+          image: Image,
+          quote_line: QuoteLine,
+          double_image: DoubleImage,
+        }"
         :context="{pageContainer: pageContainer}"
       />
     </div>
