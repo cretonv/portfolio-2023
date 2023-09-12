@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import {defineProps} from "vue"
+import {useFirstVisitComposable} from "~/composables/firstVisitComposable";
+import {useTransitionComposable} from "~/composables/transitionComposable";
+import {onMounted} from "@vue/runtime-core";
+import {gsap} from "gsap";
+import SplitType from "split-type";
+
+const {firstVisitState} = useFirstVisitComposable()
+const {transitionState} = useTransitionComposable()
 defineProps<{
   projectName: string,
   thumbnail: object,
@@ -8,6 +16,57 @@ defineProps<{
   context: string,
   expertises: [object]
 }>()
+
+const logoElement = ref()
+const projectNameElement = ref()
+const infoElements = ref([])
+
+watch(
+    () => transitionState.transitionComplete,
+    (state) => {
+      if (state) {
+        initGsap()
+      }
+    }
+)
+
+onMounted(() => {
+  if (transitionState.transitionComplete || firstVisitState.isFirstVisit) {
+    initGsap()
+  }
+})
+
+const initGsap = () => {
+  const tl = gsap.timeline()
+  const splitName = SplitType.create(projectNameElement.value, {types: 'chars'})
+  // console.log(Array.from(projectNameElement.value.childNodes)[8].classList.contains('line'))
+  const line = Array.from(projectNameElement.value.childNodes).find((element) => {
+    if(element.classList && element.classList.contains('line')) {
+      return element
+    }
+  })
+  let lineCharCounter = 0
+  projectNameElement.value.classList.remove('opacity-0')
+  tl.to(logoElement.value, {opacity: 1, duration: 1.5})
+  if(splitName.chars) {
+    Array.from(splitName.chars).forEach((char) => {
+      tl.from(char, {
+        y: 100 + 20 * lineCharCounter,
+        duration: 0.7,
+        delay: 0.05,
+        stagger: { amount: 1.3 * lineCharCounter },
+        ease: "sine.out"
+      }, "<")
+      lineCharCounter ++
+    })
+  }
+  tl.to(line, {width: '100%', duration: 1.5}, ">-0.3")
+  if(infoElements.value) {
+    infoElements.value.forEach((info) => {
+      tl.from(info, {opacity: 0, duration: 0.7}, ">-0.2")
+    })
+  }
+}
 </script>
 <template>
   <div class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
@@ -27,25 +86,39 @@ defineProps<{
           :src="thumbnail.url"
           :alt="thumbnail.alt">
     </div>
-    <div v-if="logo" class="logo absolute top-1/2 -translate-y-[90%] w-screen">
+    <div v-if="logo" ref="logoElement" class="logo absolute top-1/2 -translate-y-[90%] w-screen opacity-0">
       <img class="mx-auto h-[200px] w-auto" :src="logo.url" :alt="logo.alt">
     </div>
     <div class="hero-infos relative px-10 pt-24 w-screen h-auto -md:px-4">
       <div
-          class="ml-10 pb-9 font-title text-6xl text-white border-white border-solid border-b-[0.5px] -md:text-5xl -md:ml-0 -md:pb-4"
+          ref="projectNameElement"
+          class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-5xl -md:ml-0 -md:pb-4"
       >
         {{projectName}}
+        <div class="line absolute bottom-0 left-0 bg-white h-[0.5px] w-0" />
       </div>
       <div class="flex ml-10 py-8 gap-20 -md:ml-0 -md:gap-4 -md:flex-wrap -md:pt-5 -md:pb-4">
-        <div class="font-lato text-xs -md:w-full" v-if="detailedYear">
+        <div
+          class="font-lato text-xs -md:w-full"
+          v-if="detailedYear"
+          :ref="(el) => {infoElements[0] = el}"
+        >
           <span class="font-light">Date</span> <br>
           <p class="font-medium mt-1">{{ detailedYear }}</p>
         </div>
-        <div class="font-lato text-xs -md:w-full" v-if="context">
+        <div
+          class="font-lato text-xs -md:w-f ull"
+          v-if="context"
+          :ref="(el) => {infoElements[1] = el}"
+        >
           <span class="font-light">Context</span> <br>
           <p class="font-medium mt-1">{{ context }}</p>
         </div>
-        <div class="font-lato text-xs -md:w-full" v-if="expertises">
+        <div
+          class="font-lato text-xs -md:w-full"
+          v-if="expertises"
+          :ref="(el) => {infoElements[2] = el}"
+        >
           <span class="font-light">Expertises</span> <br>
           <p class="font-medium mt-1">
             <span v-for="expertise in expertises" class="expertise">{{ expertise.expertise }}</span>
