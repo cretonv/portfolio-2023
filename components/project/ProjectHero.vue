@@ -27,21 +27,25 @@ defineProps<{
           :src="thumbnail.url"
           :alt="thumbnail.alt">
     </div>
-    <div v-if="logo" class="logo absolute top-1/2 -translate-y-1/2 w-screen">
+    <div v-if="logo" class="logo absolute top-1/2 -translate-y-[90%] w-screen">
       <img class="mx-auto h-[200px] w-auto" :src="logo.url" :alt="logo.alt">
     </div>
-    <div class="hero-infos relative px-10 pt-24 w-screen h-auto">
-      <div class="ml-10 pb-9 font-title text-6xl text-white border-white border-solid border-b-[0.5px]">{{projectName}}</div>
-      <div class="flex ml-10 py-8 gap-20">
-        <div class="font-lato text-xs" v-if="detailedYear">
+    <div class="hero-infos relative px-10 pt-24 w-screen h-auto -md:px-4">
+      <div
+          class="ml-10 pb-9 font-title text-6xl text-white border-white border-solid border-b-[0.5px] -md:text-5xl -md:ml-0 -md:pb-4"
+      >
+        {{projectName}}
+      </div>
+      <div class="flex ml-10 py-8 gap-20 -md:ml-0 -md:gap-4 -md:flex-wrap -md:pt-5 -md:pb-4">
+        <div class="font-lato text-xs -md:w-full" v-if="detailedYear">
           <span class="font-light">Date</span> <br>
           <p class="font-medium mt-1">{{ detailedYear }}</p>
         </div>
-        <div class="font-lato text-xs" v-if="context">
+        <div class="font-lato text-xs -md:w-full" v-if="context">
           <span class="font-light">Context</span> <br>
           <p class="font-medium mt-1">{{ context }}</p>
         </div>
-        <div class="font-lato text-xs" v-if="expertises">
+        <div class="font-lato text-xs -md:w-full" v-if="expertises">
           <span class="font-light">Expertises</span> <br>
           <p class="font-medium mt-1">
             <span v-for="expertise in expertises" class="expertise">{{ expertise.expertise }}</span>
