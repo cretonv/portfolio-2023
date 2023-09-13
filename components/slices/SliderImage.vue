@@ -38,7 +38,7 @@ const initGsap = () => {
 
   gsap.to(slider.value, {
     xPercent: -percent,
-    ease: "none",
+    ease: "linear",
     scrollTrigger: {
       trigger: slider.value,
       start: "bottom bottom",

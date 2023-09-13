@@ -54,7 +54,7 @@ const initGsap = () => {
         y: 100 + 20 * lineCharCounter,
         duration: 0.7,
         delay: 0.05,
-        stagger: { amount: 1.3 * lineCharCounter },
+        stagger: { amount: 1 * lineCharCounter },
         ease: "sine.out"
       }, "<")
       lineCharCounter ++
@@ -94,7 +94,7 @@ const initGsap = () => {
           ref="projectNameElement"
           class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-5xl -md:ml-0 -md:pb-4"
       >
-        {{projectName}}
+        <div class="overflow-hidden">{{projectName}}</div>
         <div class="line absolute bottom-0 left-0 bg-white h-[0.5px] w-0" />
       </div>
       <div class="flex ml-10 py-8 gap-20 -md:ml-0 -md:gap-4 -md:flex-wrap -md:pt-5 -md:pb-4">
