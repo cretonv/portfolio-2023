@@ -79,7 +79,7 @@ const toggleCursorVisibility = (newState: boolean) => {
 </script>
 <template>
   <div ref="container" @mousemove="setXandY" class="relative bg-black w-full h-full min-h-screen flex item-stretch -md:overflow-hidden">
-    <div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>
+    <div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial :go-home="false" class="mt-8" /></div>
     <div class="flex flex-col justify-center -md:pl-12 -md:pr-12 z-10">
       <TitleH1
           class="mb-14 select-none"

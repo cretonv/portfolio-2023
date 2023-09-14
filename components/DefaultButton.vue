@@ -20,12 +20,12 @@ const yTranslate = computed(() => {
 <template>
   <button
       v-if="mousePosition && container"
-      class="relative block px-4 py-2 border border-white rounded-full text-sm font-porpora bg-white-secondary/[.05] cursor-none"
+      class="relative block px-4 py-2 border border-white rounded-full text-sm text-white font-porpora bg-white-secondary/[.05] cursor-none"
       @mousedown="toggleMainCursorToHover(false)"
       @mouseover="toggleMainCursorToHover(true)"
       @mouseleave="toggleMainCursorToHover(false)"
   >
-    <span class="hover-bg" :style="`transform: translate(${xTranslate}px, ${yTranslate}px)`" />
+    <div class="hover-bg" :style="`transform: translate(${xTranslate}px, ${yTranslate}px)`" />
     <slot />
   </button>
 </template>

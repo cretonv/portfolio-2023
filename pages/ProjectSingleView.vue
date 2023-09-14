@@ -41,7 +41,7 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
     <TransitionLayer />
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black min-h-screen">
       <div class="absolute z-10 left-10 -md:absolute -md:pl-2 -md:pr-0 -md:left-4">
-        <LogoInitial :go-home="false" class="mt-8" />
+        <LogoInitial :go-home="true" class="mt-8" />
       </div>
       <BackButton class="absolute z-10 left-24 top-6 -md:left-4 -md:top-16" target="projects-list" />
       <ProjectHero

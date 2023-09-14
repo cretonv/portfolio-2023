@@ -6,6 +6,7 @@ import Lenis from "@studio-freight/lenis";
 import {definePageMeta} from "#imports";
 import transitionConfig from "~/helpers/transitionConfig";
 import {useFirstVisitComposable} from "../composables/firstVisitComposable"
+import HomeProjectsList from "~/components/HomeProjectsList.vue";
 
 definePageMeta({
   pageTransition: transitionConfig
@@ -44,6 +45,13 @@ const presentationBlock = computed(() => {
     return {}
   }
 })
+const projectListBlock = computed(() => {
+  if (home.value && home.value.data) {
+    return home.value.data.body.find((element) => element.slice_type === 'project_list')
+  } else {
+    return {}
+  }
+})
 </script>
 <template>
   <div class="relative bg-black overflow-hidden">
@@ -51,6 +59,7 @@ const presentationBlock = computed(() => {
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4">
       <HomeHero />
       <Presentation class="mt-8" :data="presentationBlock" />
+      <HomeProjectsList :data="projectListBlock" />
     </section>
     <Footer :mainContent="mainContent" style="z-index: 0" class="relative" />
   </div>
