@@ -88,7 +88,7 @@ const onItemOpen = (openingItemId) => {
         {{general.data.projects_listing_title[0].text}}
       </h1>
       <div class="flex flex-wrap w-full text-white font-lato -md:mt-16 pb-8" v-if="projects">
-        <ProjectListI tem
+        <ProjectListItem
             :key="project.id"
             v-for="(project, index) in projects"
             :ref="(el) => (itemsComponents[index] = el)"

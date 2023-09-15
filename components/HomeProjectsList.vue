@@ -32,7 +32,6 @@ watch(
 )
 const initGsap = () => {
   gsap.registerPlugin(ScrollTrigger)
-  console.log(slider.value.offsetHeight)
   const percent = 100 - 100 * container.value.offsetHeight / slider.value.offsetHeight - 100 * 182 / slider.value.offsetHeight
 
   gsap.to(slider.value, {
