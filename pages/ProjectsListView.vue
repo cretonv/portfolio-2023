@@ -84,11 +84,11 @@ const onItemOpen = (openingItemId) => {
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen pt-13">
       <!--<div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>-->
       <BackButton class="absolute left-16 top-2 z-10 -md:left-10"/>
-      <h1 ref="title" class="absolute left-0 top-1 font-title text-white text-4xl pt-14 pl-16 opacity-0 overflow-hidden -md:pl-10">
+      <h1 ref="title" class="left-0 top-1 font-title text-white text-4xl pt-8 pl-8 opacity-0 overflow-hidden -md:pl-10">
         {{general.data.projects_listing_title[0].text}}
       </h1>
       <div class="flex flex-wrap w-full text-white font-lato -md:mt-16 pb-8" v-if="projects">
-        <ProjectListItem
+        <ProjectListI tem
             :key="project.id"
             v-for="(project, index) in projects"
             :ref="(el) => (itemsComponents[index] = el)"
@@ -102,8 +102,3 @@ const onItemOpen = (openingItemId) => {
     <Footer :mainContent="mainContent" style="z-index: 0" class="relative" />
   </div>
 </template>
-<style>
-.project-list-item:first-child > .open {
-  padding-top: 80px;
-}
-</style>

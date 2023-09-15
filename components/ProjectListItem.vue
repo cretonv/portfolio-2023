@@ -73,11 +73,12 @@ defineExpose({
             :class="buttonHover ? 'grayscale-0' : 'grayscale'"
         >
           <img
-              v-if="project.data.thumbnail"
+              v-if="project.data.list_thumbnail"
               class="absolute top-0 left-0 w-full h-full object-cover object-top"
-              :src="project.data.thumbnail.url"
+              :src="project.data.list_thumbnail.url"
               alt="Thumbnail"
           >
+          <img class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-32 w-auto" :src="project.data.logo.url" :alt="project.data.logo.alt">
         </div>
       </div>
     </div>

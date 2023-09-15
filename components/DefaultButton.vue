@@ -14,13 +14,13 @@ const xTranslate = computed(() => {
   return (((props.mousePosition.x - props.container.offsetLeft) - props.container.offsetWidth / 2) / props.container.offsetWidth * 20)
 })
 const yTranslate = computed(() => {
-  return (((props.mousePosition.y - props.container.offsetTop) - props.container.offsetHeight / 2) / props.container.offsetHeight * 20)
+  return (((props.mousePosition.y - (window.pageYOffset + props.container.getBoundingClientRect().top)) - props.container.offsetHeight / 2) / props.container.offsetHeight * 20)
 })
 </script>
 <template>
   <button
       v-if="mousePosition && container"
-      class="relative block px-4 py-2 border border-white rounded-full text-sm text-white font-porpora bg-white-secondary/[.05] cursor-none"
+      class="relative z-20 block px-4 py-2 border border-white rounded-full text-sm text-white font-porpora bg-white-secondary/[.05] cursor-none"
       @mousedown="toggleMainCursorToHover(false)"
       @mouseover="toggleMainCursorToHover(true)"
       @mouseleave="toggleMainCursorToHover(false)"
