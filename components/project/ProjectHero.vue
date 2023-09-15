@@ -8,18 +8,21 @@ import SplitType from "split-type";
 
 const {firstVisitState} = useFirstVisitComposable()
 const {transitionState} = useTransitionComposable()
-defineProps<{
+const props = defineProps<{
   projectName: string,
   thumbnail: object,
   logo: object,
   detailedYear: string,
   context: string,
-  expertises: [object]
+  expertises: [object],
+  projectUrl: string,
 }>()
 
+const btnContainer = ref()
 const logoElement = ref()
 const projectNameElement = ref()
 const infoElements = ref([])
+const mousePosition = ref({x: 0, y:0})
 
 watch(
     () => transitionState.transitionComplete,
@@ -39,7 +42,6 @@ onMounted(() => {
 const initGsap = () => {
   const tl = gsap.timeline()
   const splitName = SplitType.create(projectNameElement.value, {types: 'chars'})
-  // console.log(Array.from(projectNameElement.value.childNodes)[8].classList.contains('line'))
   const line = Array.from(projectNameElement.value.childNodes).find((element) => {
     if(element.classList && element.classList.contains('line')) {
       return element
@@ -63,13 +65,28 @@ const initGsap = () => {
   tl.to(line, {width: '100%', duration: 1.5}, ">-0.3")
   if(infoElements.value) {
     infoElements.value.forEach((info) => {
-      tl.from(info, {opacity: 0, duration: 0.7}, ">-0.2")
+      tl.to(info, {opacity: 1, duration: 0.7}, ">-0.2")
+    })
+  }
+  tl.to(btnContainer.value, {opacity: 1, duration: 0.7}, ">-0.2")
+}
+const getMousePosition = (e: MouseEvent) => {
+  mousePosition.value.x = e.pageX
+  mousePosition.value.y = e.pageY
+}
+const goToProject = async () => {
+  if(props.projectUrl){
+    await navigateTo(props.projectUrl, {
+      external: true,
+      open: {
+        target: '_blank'
+      }
     })
   }
 }
 </script>
 <template>
-  <div class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
+  <div @mousemove="getMousePosition" class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
     <!--<div
       v-if="thumbnail.url"
       class="absolute top-0 left-0 w-full h-full"
@@ -97,32 +114,44 @@ const initGsap = () => {
         <div class="overflow-hidden">{{projectName}}</div>
         <div class="line absolute bottom-0 left-0 bg-white h-[0.5px] w-0" />
       </div>
-      <div class="flex ml-10 py-8 gap-20 -md:ml-0 -md:gap-4 -md:flex-wrap -md:pt-5 -md:pb-4">
-        <div
-          class="font-lato text-xs -md:w-full"
-          v-if="detailedYear"
-          :ref="(el) => {infoElements[0] = el}"
-        >
-          <span class="font-light">Date</span> <br>
-          <p class="font-medium mt-1">{{ detailedYear }}</p>
+      <div class="flex items-start justify-between ml-10 py-8 -md:ml-0 -md:pt-5 -md:pb-4">
+        <div class="flex gap-20 -md:gap-4 -md:flex-wrap">
+          <div
+              class="font-lato text-xs opacity-0 -md:w-full"
+              v-if="detailedYear"
+              :ref="(el) => {infoElements[0] = el}"
+          >
+            <span class="font-light">Date</span> <br>
+            <p class="font-medium mt-1">{{ detailedYear }}</p>
+          </div>
+          <div
+              class="font-lato text-xs opacity-0 -md:w-full"
+              v-if="context"
+              :ref="(el) => {infoElements[1] = el}"
+          >
+            <span class="font-light">Context</span> <br>
+            <p class="font-medium mt-1">{{ context }}</p>
+          </div>
+          <div
+              class="font-lato text-xs opacity-0 -md:w-full"
+              v-if="expertises"
+              :ref="(el) => {infoElements[2] = el}"
+          >
+            <span class="font-light">Expertises</span> <br>
+            <p class="font-medium mt-1">
+              <span v-for="expertise in expertises" class="expertise">{{ expertise.expertise }}</span>
+            </p>
+          </div>
         </div>
-        <div
-          class="font-lato text-xs -md:w-f ull"
-          v-if="context"
-          :ref="(el) => {infoElements[1] = el}"
-        >
-          <span class="font-light">Context</span> <br>
-          <p class="font-medium mt-1">{{ context }}</p>
-        </div>
-        <div
-          class="font-lato text-xs -md:w-full"
-          v-if="expertises"
-          :ref="(el) => {infoElements[2] = el}"
-        >
-          <span class="font-light">Expertises</span> <br>
-          <p class="font-medium mt-1">
-            <span v-for="expertise in expertises" class="expertise">{{ expertise.expertise }}</span>
-          </p>
+        <div class="w-fit opacity-0" ref="btnContainer">
+          <DefaultButton
+              v-if="projectUrl"
+              :container="btnContainer"
+              :mouse-position="mousePosition"
+              @click="goToProject"
+          >
+            Voir le projet
+          </DefaultButton>
         </div>
       </div>
     </div>

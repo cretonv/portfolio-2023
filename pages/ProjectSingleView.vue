@@ -51,6 +51,7 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
           :detailedYear="project.data.detailed_year"
           :context="project.data.context"
           :expertises="project.data.expertises"
+          :projectUrl="project.data.url.url"
       />
       <div class="pb-24 -md:pb-0">
         <SliceZone
