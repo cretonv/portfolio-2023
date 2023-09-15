@@ -18,7 +18,7 @@ const click = async () => {
     <PrismicImage class="absolute left-0 right-0 object-cover object-center w-full h-full" :field="project.data.list_thumbnail" />
     <img class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" :src="project.data.logo.url" :alt="project.data.logo.alt">
     <div
-        class="hover-circle relative z-20 top-1/2 flex items-center flex-wrap bg-white w-full rounded-full overflow-hidden"
+        class="hover-circle relative z-20 top-1/2 flex items-center flex-wrap bg-white w-full overflow-hidden"
         @mousedown="click"
         @mouseover="toggleMainCursorToHover(true)"
         @mouseleave="toggleMainCursorToHover(false)"
@@ -56,11 +56,11 @@ const click = async () => {
 .hover-circle {
   transition: all 0.7s;
   aspect-ratio: 1 / 1;
-  transform-origin: center 0;
-  transform: scale(0) translateY(-50%);
+  clip-path: circle(0 at 50% 50%);
+  transform: translateY(-50%);
 }
 .item-container:hover .hover-circle {
-  transform: scale(1) translateY(-50%);
+  clip-path: circle(50% at 50% 50%);
 }
 .hover-content {
   transition: all 0.3s;
