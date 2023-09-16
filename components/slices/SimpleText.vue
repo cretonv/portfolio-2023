@@ -14,7 +14,7 @@ const props = defineProps<{
     />
     <PrismicRichText
         v-if="slice.primary.text_content.length > 0"
-        class="w-5/12 text-sm -md:w-full"
+        class="rich-text w-5/12 text-sm -md:w-full"
         :field="slice.primary.text_content"
     />
   </div>

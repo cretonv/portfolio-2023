@@ -55,6 +55,10 @@ button:hover {
     margin-left: 16px;
 }
 
+.rich-text p:not(:first-of-type) {
+    margin-top: 12px;
+}
+
 @media screen and (max-width: 768px) {
     .cursor-hover-shadow,
     .custom-main-cursor {
