@@ -2,6 +2,7 @@
 import {onMounted, onBeforeUnmount} from "@vue/runtime-core";
 import SplitType from "split-type";
 import {gsap} from "gsap";
+import {throttle} from "@antfu/utils";
 
 const title = ref()
 let splitTitle
@@ -21,38 +22,10 @@ onMounted(() => {
   if(splitTitle.words) {
     splitTitle.words.forEach((word) => {
       lineCharCounter = 0
-      word.addEventListener('mouseleave', (e) => {
-        inTimeline.paused()
-        inTimeline.clear()
-        charAnimPlay.value = false
-        const childTarget = e.target.childNodes[Math.round(e.target.childNodes.length / 2) - 1]
-        animLetterScaleOut(childTarget)
-        const prev = childTarget.previousSibling
-        const next = childTarget.nextSibling
-        if(prev) {
-          triggerLetterScale(prev, 'prev', true)
-        }
-        if(next) {
-          triggerLetterScale(next, 'next', true)
-        }
-      })
+      word.addEventListener('mouseleave', triggerOnLeaveWord)
       Array.from(word.children).forEach((char) => {
         inTimeline.play()
-        char.addEventListener('mouseover', (e) => {
-          if(e.target.classList.contains('char')) {
-            charAnimPlay.value = true
-            prevTimelineArray.push(e.target)
-            animLetterScale(e.target)
-            const prev = e.target.previousSibling
-            const next = e.target.nextSibling
-            if(prev && charAnimPlay.value) {
-              triggerLetterScale(prev,'prev', false)
-            }
-            if(next && charAnimPlay.value) {
-              triggerLetterScale(next, 'next', false)
-            }
-          }
-        })
+        char.addEventListener('mouseover', triggerOnHoverLetter)
         gsap.from(char, {
           y: 100 + 20 * lineCharCounter,
           duration: 0.75,
@@ -68,7 +41,43 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   SplitType.revert(title.value)
+  splitTitle.words.forEach((word) => {
+    word.removeEventListener('mouseleave', triggerOnLeaveWord)
+    Array.from(word.children).forEach((char) => {
+      char.removeEventListener('mouseover', triggerOnHoverLetter)
+    })
+  })
 })
+const triggerOnHoverLetter = (e) => {
+  if(e.target.classList.contains('char')) {
+    charAnimPlay.value = true
+    prevTimelineArray.push(e.target)
+    animLetterScale(e.target)
+    const prev = e.target.previousSibling
+    const next = e.target.nextSibling
+    if(prev && charAnimPlay.value) {
+      triggerLetterScale(prev,'prev', false)
+    }
+    if(next && charAnimPlay.value) {
+      triggerLetterScale(next, 'next', false)
+    }
+  }
+}
+const triggerOnLeaveWord = (e) => {
+  inTimeline.paused()
+  inTimeline.clear()
+  charAnimPlay.value = false
+  const childTarget = e.target.childNodes[Math.round(e.target.childNodes.length / 2) - 1]
+  animLetterScaleOut(childTarget)
+  const prev = childTarget.previousSibling
+  const next = childTarget.nextSibling
+  if(prev) {
+    triggerLetterScale(prev, 'prev', true)
+  }
+  if(next) {
+    triggerLetterScale(next, 'next', true)
+  }
+}
 const triggerLetterScale = (element, direction, isOut) => {
   if(isOut) {
     animLetterScaleOut(element)
