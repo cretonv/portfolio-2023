@@ -63,19 +63,19 @@ const getMousePosition = (e: MouseEvent) => {
           v-for="item in data.items"
           :uid="item.project.uid"
           :client="client"
-          class="project-item min-h-[364px] h-[20vw]"
+          class="project-item min-h-[364px] h-[22vw]"
       />
       <ProjectSliderItem
           v-if="data.items.length > 5 && data.items.length % 2 === 0"
           :uid="data.items[0].project.uid"
           :client="client"
-          class="project-item min-h-[364px] h-[20vw]"
+          class="project-item min-h-[364px] h-[22vw]"
       />
       <ProjectSliderItem
           v-if="data.items.length > 5"
           :uid="data.items[1].project.uid"
           :client="client"
-          class="project-item min-h-[364px] h-[20vw]"
+          class="project-item min-h-[364px] h-[22vw]"
       />
     </div>
     <div class="w-5/12 flex items-center pb-32">

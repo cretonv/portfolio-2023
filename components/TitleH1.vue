@@ -99,6 +99,12 @@ h1.h1-title {
   line-height: 123px;
   font-kerning: none;
 }
+@media (min-width: 1450px) {
+  h1.h1-title {
+    font-size: 104px;
+    line-height: 136px;
+  }
+}
 @media (max-width: 768px) {
   h1.h1-title {
     font-size: 40px;
