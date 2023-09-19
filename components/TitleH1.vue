@@ -2,15 +2,13 @@
 import {onMounted, onBeforeUnmount} from "@vue/runtime-core";
 import SplitType from "split-type";
 import {gsap} from "gsap";
-import {throttle} from "@antfu/utils";
 
 const title = ref()
 let splitTitle
-let charAnimPlay = ref(false)
+let lastHoverChar: HTMLElement
 const inTimeline = gsap.timeline({paused: false})
 const outTimeline = gsap.timeline({paused: false})
-const prevTimelineArray = []
-const nextTimelineArray = []
+
 onMounted(() => {
   // To don't display h1 before load (without style)
   title.value.classList.remove('opacity-0')
@@ -22,10 +20,10 @@ onMounted(() => {
   if(splitTitle.words) {
     splitTitle.words.forEach((word) => {
       lineCharCounter = 0
-      word.addEventListener('mouseleave', triggerOnLeaveWord)
+      word.addEventListener('mouseover', charHover)
+      word.addEventListener('mouseleave', wordLeave)
       Array.from(word.children).forEach((char) => {
         inTimeline.play()
-        char.addEventListener('mouseover', triggerOnHoverLetter)
         gsap.from(char, {
           y: 100 + 20 * lineCharCounter,
           duration: 0.75,
@@ -41,74 +39,54 @@ onMounted(() => {
 })
 onBeforeUnmount(() => {
   SplitType.revert(title.value)
-  splitTitle.words.forEach((word) => {
-    word.removeEventListener('mouseleave', triggerOnLeaveWord)
-    Array.from(word.children).forEach((char) => {
-      char.removeEventListener('mouseover', triggerOnHoverLetter)
-    })
-  })
 })
-const triggerOnHoverLetter = (e) => {
-  if(e.target.classList.contains('char')) {
-    charAnimPlay.value = true
-    prevTimelineArray.push(e.target)
-    animLetterScale(e.target)
-    const prev = e.target.previousSibling
-    const next = e.target.nextSibling
-    if(prev && charAnimPlay.value) {
-      triggerLetterScale(prev,'prev', false)
-    }
-    if(next && charAnimPlay.value) {
-      triggerLetterScale(next, 'next', false)
-    }
+const charHover = (e) => {
+  if (e.target.classList.contains('char')) {
+    lastHoverChar = e.target
+    inTimeline.clear()
+    let goodIndex
+    e.target.parentNode.childNodes.forEach((element: HTMLElement, index: number) => {
+      if (element === e.target) {
+        goodIndex = index
+      }
+    })
+    inTimeline.to(e.target.parentNode.childNodes, {
+      scale: 0.94,
+      ease: "back.out(1.7)",
+      stagger: {amount: 0.4, from: goodIndex},
+    });
+    inTimeline.play()
   }
 }
-const triggerOnLeaveWord = (e) => {
-  inTimeline.paused()
-  inTimeline.clear()
-  charAnimPlay.value = false
-  const childTarget = e.target.childNodes[Math.round(e.target.childNodes.length / 2) - 1]
-  animLetterScaleOut(childTarget)
-  const prev = childTarget.previousSibling
-  const next = childTarget.nextSibling
-  if(prev) {
-    triggerLetterScale(prev, 'prev', true)
+const wordLeave = (e) => {
+  if (e.target.classList.contains('word')) {
+    inTimeline.pause()
+    outTimeline.clear()
+    let goodIndex: number
+    let fromValue: string
+    e.target.childNodes.forEach((element, index) => {
+      if (element === lastHoverChar) {
+        goodIndex = index
+      }
+    })
+    if(goodIndex) {
+      fromValue = goodIndex.toString()
+    } else (
+      fromValue = "center"
+    )
+    outTimeline.to(e.target.childNodes, {
+      scale: 1,
+      ease: "back.out(1.7)",
+      stagger: {amount: 0.4, from: fromValue},
+    });
+    outTimeline.play()
   }
-  if(next) {
-    triggerLetterScale(next, 'next', true)
-  }
-}
-const triggerLetterScale = (element, direction, isOut) => {
-  if(isOut) {
-    animLetterScaleOut(element)
-  } else {
-    animLetterScale(element)
-  }
-  if(direction === 'prev') {
-    const prev = element.previousSibling
-    if(prev && (charAnimPlay.value || isOut)) {
-      prevTimelineArray.push(prev)
-      triggerLetterScale(prev, 'prev', isOut)
-    }
-  } else if(direction === 'next') {
-    const next = element.nextSibling
-    if(next && (charAnimPlay.value || isOut)) {
-      nextTimelineArray.push(next)
-      triggerLetterScale(next, 'next', isOut)
-    }
-  }
-}
-const animLetterScale = (element) => {
-  inTimeline.to(element, {scale: 0.91, duration: 0.15}, '-=0.10')
-}
-const animLetterScaleOut = (element) => {
-  outTimeline.to(element, {scale: 1, duration: 0.15}, '-=0.10')
 }
 </script>
 <template>
   <h1
-    ref="title"
-    class="h1-title text-white opacity-0"
+      ref="title"
+      class="h1-title text-white opacity-0"
   >
     <slot />
   </h1>
@@ -122,10 +100,10 @@ h1.h1-title {
   font-kerning: none;
 }
 @media (max-width: 768px) {
-    h1.h1-title {
-        font-size: 40px;
-        line-height: 56px;
-    }
+  h1.h1-title {
+    font-size: 40px;
+    line-height: 56px;
+  }
 }
 .word {
   overflow: hidden;
