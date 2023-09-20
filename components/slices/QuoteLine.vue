@@ -54,3 +54,11 @@ const initGsap = () => {
     </div>
   </div>
 </template>
+<style scoped>
+@media (min-width: 1450px) {
+  .text-6xl {
+    font-size: 4.5rem; /* 72px */
+    line-height: 1;
+  }
+}
+</style>
