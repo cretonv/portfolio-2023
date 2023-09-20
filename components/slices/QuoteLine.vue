@@ -51,10 +51,6 @@ const initGsap = () => {
         <div>{{slice.items[0].quote}}</div>
         <dot600 class="ml-6 h-10 w-auto" />
       </div>
-      <div class="quote w-fit whitespace-nowrap flex items-center">
-        <div>{{slice.items[1].quote}}</div>
-        <dot600 class="ml-6 h-10 w-auto" />
-      </div>
     </div>
   </div>
 </template>
