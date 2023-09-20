@@ -65,10 +65,10 @@ const initGsap = () => {
   tl.to(line, {width: '100%', duration: 1.5}, ">-0.3")
   if(infoElements.value) {
     infoElements.value.forEach((info) => {
-      tl.to(info, {opacity: 1, duration: 0.7}, ">-0.2")
+      tl.to(info, {opacity: 1, duration: 0.7}, ">-0.25")
     })
   }
-  tl.to(btnContainer.value, {opacity: 1, duration: 0.7}, ">-0.2")
+  tl.to(btnContainer.value, {opacity: 1, duration: 0.7}, ">-0.25")
 }
 const getMousePosition = (e: MouseEvent) => {
   mousePosition.value.x = e.pageX
@@ -112,7 +112,7 @@ const goToProject = async () => {
           class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-5xl -md:ml-0 -md:pb-4"
       >
         <div class="overflow-hidden">{{projectName}}</div>
-        <div class="line absolute bottom-0 left-0 bg-white h-[0.5px] w-0" />
+        <div class="line absolute bottom-0 left-0 bg-white h-[1px] w-0" />
       </div>
       <div class="flex items-start justify-between ml-10 py-8 -md:ml-0 -md:pt-5 -md:pb-4">
         <div class="flex gap-20 -md:gap-4 -md:flex-wrap">
