@@ -34,7 +34,7 @@ const initGsap = () => {
   const percent = 100 - 100 * (line.value.childNodes[1].offsetWidth) / line.value.offsetWidth
   gsap.to(line.value, {
     xPercent: -percent,
-    duration: 16,
+    duration: 0.01 * line.value.offsetWidth,
     ease: "linear",
     repeat: -1
   })
@@ -42,13 +42,17 @@ const initGsap = () => {
 </script>
 <template>
   <div ref="container" class="quote-line overflow-hidden w-full -my-12 -md:-my-4">
-    <div ref="line" v-if="slice.items.length > 0" class="flex w-fit gap-6 leading-loose font-title text-white text-6xl -md:text-4xl">
+    <div ref="line" v-if="slice.items.length > 1" class="flex w-fit gap-6 leading-loose font-title text-white text-6xl -md:text-4xl">
       <div v-for="quote in slice.items" class="quote w-fit whitespace-nowrap flex items-center">
         <div>{{quote.quote}}</div>
         <dot600 class="ml-6 h-10 w-auto" />
       </div>
       <div class="quote w-fit whitespace-nowrap flex items-center">
         <div>{{slice.items[0].quote}}</div>
+        <dot600 class="ml-6 h-10 w-auto" />
+      </div>
+      <div class="quote w-fit whitespace-nowrap flex items-center">
+        <div>{{slice.items[1].quote}}</div>
         <dot600 class="ml-6 h-10 w-auto" />
       </div>
     </div>
