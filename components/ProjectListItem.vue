@@ -127,8 +127,9 @@ defineExpose({
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
                   @mousedown="goToProjectPage"
-                  dot-type="300">
-                Voir la page du projet
+                  dot-type="300"
+              >
+                Voir le projet
               </LinkInline>
               <LinkInline
                   v-if="project.data.url.url"
@@ -137,8 +138,9 @@ defineExpose({
                   @mouseover="buttonHover = true"
                   target="_blank"
                   rel=“noreferrer”
-                  dot-type="600">
-                Voir le projet
+                  dot-type="600"
+              >
+                Voir le site
               </LinkInline>
             </div>
           </div>

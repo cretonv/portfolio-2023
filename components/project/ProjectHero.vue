@@ -87,15 +87,6 @@ const goToProject = async () => {
 </script>
 <template>
   <div @mousemove="getMousePosition" class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
-    <!--<div
-      v-if="thumbnail.url"
-      class="absolute top-0 left-0 w-full h-full"
-      :style="
-        'background: linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url('
-        + thumbnail.url
-        + '), lightgray 50% / cover no-repeat;'
-      "
-    />-->
     <div class="thumbnail absolute top-0 left-0 w-full h-full">
       <img
           v-if="thumbnail.url"
@@ -150,7 +141,7 @@ const goToProject = async () => {
               :mouse-position="mousePosition"
               @click="goToProject"
           >
-            Voir le projet
+            Voir le site
           </DefaultButton>
         </div>
       </div>
