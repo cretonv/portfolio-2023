@@ -41,7 +41,7 @@ onMounted(() => {
 
 const initGsap = () => {
   const tl = gsap.timeline()
-  const splitName = SplitType.create(projectNameElement.value, {types: 'chars'})
+  const splitName = SplitType.create(projectNameElement.value, {types: 'words, chars'})
   const line = Array.from(projectNameElement.value.childNodes).find((element) => {
     if(element.classList && element.classList.contains('line')) {
       return element
@@ -100,9 +100,9 @@ const goToProject = async () => {
     <div class="hero-infos relative px-10 pt-24 w-screen h-auto -md:px-4">
       <div
           ref="projectNameElement"
-          class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-5xl -md:ml-0 -md:pb-4"
+          class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-4xl -md:ml-0 -md:pb-4"
       >
-        <div class="overflow-hidden">{{projectName}}</div>
+        <h1 class="overflow-hidden">{{projectName}}</h1>
         <div class="line absolute bottom-0 left-0 bg-white h-[1px] w-0" />
       </div>
       <div class="flex items-start justify-between ml-10 py-8 -md:ml-0 -md:pt-5 -md:pb-4">
