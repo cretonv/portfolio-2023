@@ -61,14 +61,14 @@ const initGsap = () => {
   gsap.to(text.value, {
     scrollTrigger: title.value,
     opacity: 1,
-    duration: 1.5,
-    delay: 1.75,
+    duration: 1,
+    delay: 1.25,
   })
   gsap.from(photo.value, {
     scrollTrigger: title.value,
     height: 0,
-    delay: 2.25,
-    duration: 1.5,
+    delay: 1.5,
+    duration: 1,
   })
 }
 
