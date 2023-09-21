@@ -18,6 +18,7 @@ const props = defineProps<{
   projectUrl: string,
 }>()
 
+const container = ref()
 const btnContainer = ref()
 const logoElement = ref()
 const projectNameElement = ref()
@@ -84,9 +85,24 @@ const goToProject = async () => {
     })
   }
 }
+const xTranslate = computed(() => {
+  if(container.value) {
+    console.log((mousePosition.value.x - container.value.offsetWidth / 2))
+    return ((mousePosition.value.x - container.value.offsetWidth / 2) / 150)
+  } else {
+    return 0
+  }
+})
+const yTranslate = computed(() => {
+  if(container.value) {
+    return ((mousePosition.value.y - container.value.offsetHeight / 2) / 150)
+  } else {
+    return 0
+  }
+})
 </script>
 <template>
-  <div @mousemove="getMousePosition" class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
+  <div @mousemove="getMousePosition" ref="container" class="relative min-h-screen text-white flex flex-col justify-end mb-24 -md:mb-16">
     <div class="thumbnail absolute top-0 left-0 w-full h-full">
       <img
           v-if="thumbnail.url"
@@ -94,8 +110,12 @@ const goToProject = async () => {
           :src="thumbnail.url"
           :alt="thumbnail.alt">
     </div>
-    <div v-if="logo" ref="logoElement" class="logo absolute top-1/2 -translate-y-[90%] w-screen opacity-0">
-      <img class="mx-auto h-[200px] w-auto" :src="logo.url" :alt="logo.alt">
+    <div
+      v-if="logo"
+      ref="logoElement"
+      class="logo absolute top-1/2 -translate-y-[90%] w-screen opacity-0"
+    >
+      <img class="icon-logo mx-auto h-[200px] w-auto" :src="logo.url" :alt="logo.alt" :style="`transform: translate(${xTranslate}px, ${yTranslate}px)`">
     </div>
     <div class="hero-infos relative px-10 pt-24 w-screen h-auto -md:px-4">
       <div
@@ -164,5 +184,8 @@ const goToProject = async () => {
   width: 100%;
   background-color: #000;
   opacity: 0.45;
+}
+.icon-logo {
+  transition: all 0.3s;
 }
 </style>
