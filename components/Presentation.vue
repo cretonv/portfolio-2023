@@ -96,8 +96,7 @@ const getMousePosition = (e: MouseEvent) => {
     </div>
     <div
         ref="photo"
-        class="w-1/3 h-[568px] overflow-hidden opacity-0 -md:w-full -md:order-1 -md:h-[284px] -md:mb-8"
-        v-if="data.primary"
+        class="w-1/3 h-[568px] overflow-hidden opacity-0 -md:w-full -md:order-1 -md:h-[284px] -md:min-h-[284px] -md:mb-4"
     >
       <img class="object-cover object-center w-full h-[568px] -md:h-[284px]" :src="data.primary.image.url" :alt="data.primary.image.alt">
     </div>

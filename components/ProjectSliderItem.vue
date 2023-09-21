@@ -15,8 +15,15 @@ const click = async () => {
 </script>
 <template>
   <div class="item-container relative px-6">
-    <PrismicImage class="absolute left-0 right-0 object-cover object-center w-full h-full" :field="project.data.list_thumbnail" />
-    <img class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" :src="project.data.logo.url" :alt="project.data.logo.alt">
+    <PrismicImage
+        class="absolute left-0 right-0 object-cover object-center w-full h-full"
+        :field="project.data.list_thumbnail"
+    />
+    <img
+        class="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -md:h-[15vh] -md:w-auto"
+        :src="project.data.logo.url"
+        :alt="project.data.logo.alt"
+    >
     <div
         class="hover-circle relative z-20 top-1/2 flex items-center flex-wrap bg-white w-full overflow-hidden"
         @mousedown="click"
