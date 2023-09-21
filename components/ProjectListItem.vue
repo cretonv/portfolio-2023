@@ -43,6 +43,20 @@ const goToProjectPage = async () => {
   await navigateTo({ name: 'projects-single', params: {uid: props.project.uid} })
 }
 
+const clickOnImage = async () => {
+  if(props.project.data.body.length > 0) {
+    await goToProjectPage()
+  } else if(props.project.data.url.url) {
+    await navigateTo(props.project.data.url.url ,{
+      external: true,
+      open: {
+        target: '_blank'
+      }
+    })
+  }
+  toggleMainCursorToHover(false);
+}
+
 onMounted(() => {
   projectId.value = props.project.id
   gsap.from(item.value, {
@@ -65,8 +79,9 @@ defineExpose({
       <div
           class="h-0 overflow-hidden float-right"
           ref="imgContent"
-          @mouseleave="buttonHover = false"
-          @mouseover="buttonHover = true"
+          @mousedown="clickOnImage"
+          @mouseleave="buttonHover = false; toggleMainCursorToHover(false);"
+          @mouseover="buttonHover = true; toggleMainCursorToHover(true);"
       >
         <div
             class="relative w-80 h-full bg-white transition-all duration-1000"
