@@ -28,9 +28,10 @@ const title = ref()
 const itemsComponents = ref([])
 const mainContent = ref()
 let splitTitle
+let lenis
 
 onMounted(() => {
-  const lenis = new Lenis({duration: 1.8})
+  lenis = new Lenis({duration: 1.8})
   lenis.on('scroll', () => {})
 
   function raf(time:number) {
@@ -77,6 +78,12 @@ const onItemOpen = (openingItemId) => {
     }
   })
 }
+const scrollToClickedItem = (e) => {
+  if(window.innerWidth < 768) {
+    const targetElement = e.target
+    setTimeout((target = targetElement) => {lenis.scrollTo(target, {offset: -32})}, 700)
+  }
+}
 </script>
 <template>
   <div class="relative bg-black min-h-screen h-full w-screen">
@@ -84,10 +91,10 @@ const onItemOpen = (openingItemId) => {
     <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black pb-4 p-10 min-h-screen pt-13">
       <!--<div class="pl-10 pr-14 -md:absolute -md:pl-4 -md:pr-0"><LogoInitial class="mt-8" /></div>-->
       <BackButton class="absolute left-16 top-2 z-10 -md:left-10"/>
-      <h1 ref="title" class="left-0 top-1 font-title text-white text-4xl pt-8 pl-8 opacity-0 overflow-hidden -md:pl-10">
+      <h1 ref="title" class="left-0 top-1 font-title text-white text-4xl pt-8 pl-8 opacity-0 overflow-hidden -md:pl-0">
         {{general.data.projects_listing_title[0].text}}
       </h1>
-      <div class="flex flex-wrap w-full text-white font-lato -md:mt-16 pb-8" v-if="projects">
+      <div class="flex flex-wrap w-full text-white font-lato -md:mt-4 pb-8" v-if="projects">
         <ProjectListItem
             :key="project.id"
             v-for="(project, index) in projects"
@@ -96,6 +103,7 @@ const onItemOpen = (openingItemId) => {
             :index="index"
             class="project-list-item"
             @on-open="onItemOpen"
+            @mousedown="scrollToClickedItem"
         />
       </div>
     </section>
