@@ -8,6 +8,10 @@ import SimpleText from "~/components/slices/SimpleText.vue";
 import Image from "~/components/slices/Image.vue";
 import QuoteLine from "~/components/slices/QuoteLine.vue";
 import DoubleImage from "~/components/slices/DoubleImage.vue";
+import {useFirstVisitComposable} from "../composables/firstVisitComposable"
+
+const {firstVisitState, firstVisitComplete} = useFirstVisitComposable()
+
 
 const route = useRoute()
 
@@ -31,6 +35,12 @@ onMounted(() => {
   }
 
   requestAnimationFrame(raf)
+})
+
+onBeforeUnmount(() => {
+  if(firstVisitState.isFirstVisit) {
+    firstVisitComplete()
+  }
 })
 
 const { client } = usePrismic()
