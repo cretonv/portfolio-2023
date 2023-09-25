@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   prismic: { endpoint: 'https://vincent-creton.cdn.prismic.io/api/v2', modern: true, preview: false, toolbar: false },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    /*head: {
+    head: {
       script: [
         {
           id: "fairlytics-id-ajcu6jd9k7ysd6",
@@ -21,7 +21,7 @@ export default defineNuxtConfig({
           src: "https://app.fairlytics.tech/tag/tag.js",
         }
       ],
-    } */
+    }
   },
   nitro: {
     prerender: {
