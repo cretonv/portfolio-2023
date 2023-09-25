@@ -57,11 +57,11 @@ const initGsap = () => {
     <div ref="slider" class="flex w-fit pl-20 gap-4 -md:pl-4">
       <div v-for="slide in slice.items" class="relative h-56 w-80">
         <PrismicImage
-            v-if="slide.image"
+            v-if="slide.image.url"
             class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 object-contain object-center w-full h-full max-w-[80%] max-h-[80%]"
             :field="slide.image"
         />
-        <PrismicImage v-if="slide.bg_img" class="object-cover object-center w-full h-56 w-80" :field="slide.bg_img" />
+        <PrismicImage v-if="slide.bg_img.url" class="object-cover object-center w-full h-56 w-80" :field="slide.bg_img" />
       </div>
     </div>
   </div>
