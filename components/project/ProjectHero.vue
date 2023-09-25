@@ -87,7 +87,6 @@ const goToProject = async () => {
 }
 const xTranslate = computed(() => {
   if(container.value) {
-    console.log((mousePosition.value.x - container.value.offsetWidth / 2))
     return ((mousePosition.value.x - container.value.offsetWidth / 2) / 150)
   } else {
     return 0
