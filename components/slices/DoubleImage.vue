@@ -46,7 +46,7 @@ const initGsap = () => {
 }
 </script>
 <template>
-  <div ref="container" class="flex gap-4 pl-20 pr-10 w-full my-24 -md:my-16 -md:px-4 -md:flex-wrap">
+  <div ref="container" class="flex gap-4 pl-20 pr-10 w-full my-24 overflow-hidden -md:my-16 -md:px-4 -md:flex-wrap">
     <div class="relative h-[436px] w-1/2 -md:w-full -md:h-[264px]">
       <div
           :ref="(el) => (captureImages[0] = el)"
