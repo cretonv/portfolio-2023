@@ -42,7 +42,11 @@ const initGsap = () => {
 </script>
 <template>
   <div ref="container" class="quote-line overflow-hidden w-full -my-12 -md:-my-4">
-    <div ref="line" v-if="slice.items.length > 1" class="flex w-fit gap-6 leading-loose font-title text-white text-6xl -md:text-4xl">
+    <div
+      ref="line"
+      v-if="slice.items.length > 1"
+      class="flex w-fit gap-6 leading-loose font-title text-white text-6xl leading-tight -md:text-4xl"
+    >
       <div v-for="quote in slice.items" class="quote w-fit whitespace-nowrap flex items-center">
         <div>{{quote.quote}}</div>
         <dot600 class="ml-6 h-10 w-auto" />

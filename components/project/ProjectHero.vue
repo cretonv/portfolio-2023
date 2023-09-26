@@ -121,7 +121,7 @@ const yTranslate = computed(() => {
           ref="projectNameElement"
           class="relative ml-10 pb-9 font-title text-6xl text-white overflow-hidden opacity-0 -md:text-4xl -md:ml-0 -md:pb-4"
       >
-        <h1 class="overflow-hidden">{{projectName}}</h1>
+        <h1 class="overflow-hidden leading-tight">{{projectName}}</h1>
         <div class="line absolute bottom-0 left-0 bg-white h-[1px] w-0" />
       </div>
       <div class="flex items-start justify-between ml-10 py-8 -md:ml-0 -md:pt-5 -md:pb-4">
