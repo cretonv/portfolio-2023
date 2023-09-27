@@ -38,10 +38,6 @@ const close = () => {
   }
 }
 
-const goToProjectPage = async () => {
-  toggleMainCursorToHover(false)
-  await navigateTo({ name: 'projects-single', params: {uid: props.project.uid} })
-}
 
 const clickOnImage = async () => {
   if(props.project.data.body.length > 0) {
@@ -139,9 +135,10 @@ defineExpose({
             <div class="w-1/2 flex items-end justify-between gap-4 -md:flex-wrap -md:justify-start -md:w-full">
               <LinkInline
                   v-if="project.data.body.length > 0"
+                  :dynamicPage="{ name: 'projects-single', params: {uid: props.project.uid} }"
                   @mouseleave="buttonHover = false"
                   @mouseover="buttonHover = true"
-                  @mousedown="goToProjectPage"
+                  @mousedown="toggleMainCursorToHover(false)"
                   dot-type="300"
               >
                 Voir le projet

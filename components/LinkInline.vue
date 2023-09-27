@@ -22,7 +22,9 @@ const props = defineProps({
     },
     link: {
         type: String,
-        required: true,
+    },
+    dynamicPage: {
+        type: Object,
     },
     target: {
         type: String,
@@ -38,17 +40,17 @@ const Svg = computed(() => {
 })
 </script>
 <template>
-    <a
+    <NuxtLink
         class="flex items-center cursor-none"
         :class="darkMode? 'text-black dark' : 'text-beige'"
-        :href="link"
+        :to="link ? link : dynamicPage"
         :target="target"
         @mouseover="toggleMainCursorToHover(true)"
         @mouseleave="toggleMainCursorToHover(false)"
     >
         <Svg class="mr-2" />
         <div class="relative uppercase text-sm"><slot /></div>
-    </a>
+    </NuxtLink>
 </template>
 <style>
 a > div::after {
