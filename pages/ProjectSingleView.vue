@@ -35,6 +35,10 @@ onMounted(() => {
   }
 
   requestAnimationFrame(raf)
+
+  if(project) {
+    console.log(project)
+  }
 })
 
 onBeforeUnmount(() => {
@@ -49,37 +53,35 @@ const {data: project } = await useAsyncData('project', () => client.getByUID('pr
 <template>
   <div v-if="project" ref="pageContainer" class="relative bg-black min-h-screen h-full w-screen">
     <TransitionLayer />
-    <ClientOnly fallback-tag="div" fallback="Loading content...">
-      <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black min-h-screen">
-        <div class="absolute z-10 left-10 -md:absolute -md:pl-2 -md:pr-0 -md:left-4">
-          <LogoInitial :go-home="true" class="mt-8" />
-        </div>
-        <BackButton class="absolute z-10 left-24 top-6 -md:left-4 -md:top-16" target="projects-list" />
-        <ProjectHero
-            :projectName="project.data.title[0].text"
-            :thumbnail="project.data.thumbnail"
-            :logo="project.data.logo"
-            :detailedYear="project.data.detailed_year"
-            :context="project.data.context"
-            :expertises="project.data.expertises"
-            :projectUrl="project.data.url.url"
+    <section ref="mainContent" style="z-index: 1" class="relative main-content bg-black min-h-screen">
+      <div class="absolute z-10 left-10 -md:absolute -md:pl-2 -md:pr-0 -md:left-4">
+        <LogoInitial :go-home="true" class="mt-8" />
+      </div>
+      <BackButton class="absolute z-10 left-24 top-6 -md:left-4 -md:top-16" target="projects-list" />
+      <ProjectHero
+          :projectName="project.data.title[0].text"
+          :thumbnail="project.data.thumbnail"
+          :logo="project.data.logo"
+          :detailedYear="project.data.detailed_year"
+          :context="project.data.context"
+          :expertises="project.data.expertises"
+          :projectUrl="project.data.url.url"
+      />
+      <div class="pb-24 -md:pb-0">
+        <SliceZone
+            :slices="project.data.body"
+            :components="{
+          slider_image: SliderImage,
+          text_image: TextImage,
+          simple_text: SimpleText,
+          image: Image,
+          quote_line: QuoteLine,
+          double_image: DoubleImage,
+        }"
+            :context="{pageContainer: pageContainer}"
         />
-        <div class="pb-24 -md:pb-0">
-          <SliceZone
-              :slices="project.data.body"
-              :components="{
-            slider_image: SliderImage,
-            text_image: TextImage,
-            simple_text: SimpleText,
-            image: Image,
-            quote_line: QuoteLine,
-            double_image: DoubleImage,
-          }"
-              :context="{pageContainer: pageContainer}"
-          />
-        </div>
-      </section>
-    </ClientOnly>
+      </div>
+    </section>
     <FooterLight :mainContent="mainContent" style="z-index: 0" class="relative" />
   </div>
 </template>
