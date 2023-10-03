@@ -36,8 +36,8 @@ onMounted(() => {
 
   requestAnimationFrame(raf)
 
-  if(project) {
-    console.log(project)
+  if(route.params.uid) {
+    console.log(route.params.uid)
   }
 })
 
