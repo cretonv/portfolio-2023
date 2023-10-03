@@ -24,7 +24,7 @@ definePageMeta({
 const pageContainer = ref()
 const mainContent = ref()
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   const { client } = usePrismic()
   const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
 })
