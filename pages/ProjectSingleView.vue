@@ -24,6 +24,11 @@ definePageMeta({
 const pageContainer = ref()
 const mainContent = ref()
 
+onBeforeMount(() => {
+  const { client } = usePrismic()
+  const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
+})
+
 onMounted(() => {
   const lenis = new Lenis({duration: 1.8})
   lenis.on('scroll', () => {
@@ -47,8 +52,6 @@ onBeforeUnmount(() => {
   }
 })
 
-const { client } = usePrismic()
-const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
 </script>
 <template>
   <div v-if="project" ref="pageContainer" class="relative bg-black min-h-screen h-full w-screen">
