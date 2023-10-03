@@ -24,10 +24,6 @@ definePageMeta({
 const pageContainer = ref()
 const mainContent = ref()
 
-onBeforeMount(async () => {
-  const { client } = usePrismic()
-  const {data: project } = await useAsyncData('project', () => client.getByUID('project', route.params.uid))
-})
 
 onMounted(() => {
   const lenis = new Lenis({duration: 1.8})
@@ -52,6 +48,8 @@ onBeforeUnmount(() => {
   }
 })
 
+const { client } = usePrismic()
+const {data: project } = await useAsyncData('project_' + route.params.uid, () => client.getByUID('project', route.params.uid))
 </script>
 <template>
   <div v-if="project" ref="pageContainer" class="relative bg-black min-h-screen h-full w-screen">
