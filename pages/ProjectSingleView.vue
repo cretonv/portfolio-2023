@@ -36,10 +36,6 @@ onMounted(() => {
   }
 
   requestAnimationFrame(raf)
-
-  if(route.params.uid) {
-    console.log(route.params.uid)
-  }
 })
 
 onBeforeUnmount(() => {
