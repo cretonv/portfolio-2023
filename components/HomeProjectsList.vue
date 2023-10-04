@@ -64,7 +64,7 @@ const initGsap = () => {
       scrollTrigger: {
         trigger: container.value,
         start: 'true true',
-        end : '+=80%',
+        end : '+=100%',
         scrub: true,
         pin: true,
       }
